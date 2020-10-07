@@ -1,3 +1,3 @@
 for f in *.*; do
-    "/content/teste/stemgen.x" -i "$f"
+    "/content/teste/stemgen" -i "$f"
 done
