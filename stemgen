@@ -89,7 +89,7 @@ create_tags_json() {
 split_song() {
     echo "Splitting song..."
 
-    spleeter separate -B tensorflow -c m4a -i "$INPUT_PATH" -p "./base_config.json" -o output
+    spleeter separate -B tensorflow -c m4a -i "$INPUT_PATH" -p "/content/teste/base_config.json" -o output
 
     echo "Done."
 }
@@ -97,7 +97,7 @@ split_song() {
 create_stem() {
     echo "Creating stem..."
 
-    ./ni-stem/ni-stem create -s "output/$FILE_NAME/drums.wav" "output/$FILE_NAME/bass.wav" "output/$FILE_NAME/other.wav" "output/$FILE_NAME/vocals.wav" -x "output/$FILE_NAME/$FILE_NAME.wav" -t "output/$FILE_NAME/tags.json" -m metadata.json -f alac
+    /content/teste/ni-stem/ni-stem" create -s "output/$FILE_NAME/drums.wav" "output/$FILE_NAME/bass.wav" "output/$FILE_NAME/other.wav" "output/$FILE_NAME/vocals.wav" -x "output/$FILE_NAME/$FILE_NAME.wav" -t "output/$FILE_NAME/tags.json" -m metadata.json -f alac
 
     echo "Done."
 }
