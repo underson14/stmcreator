@@ -14,4 +14,3 @@ chmod -R 755 "/content/teste/ni-stem/"
 chmod -R 755 "/content/teste/ni-stem/gpac/"
 chmod -R 755 "/content/teste/stemgen"
 rm -rf "/content/teste/__MACOSX"
-chmod +x /content/teste/stemgen.x
