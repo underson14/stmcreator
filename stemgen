@@ -97,7 +97,7 @@ split_song() {
 create_stem() {
     echo "Creating stem..."
 
-    "/content/teste/ni-stem/ni-stem" create -s "output/$FILE_NAME/2.vocais.wav" "output/$FILE_NAME/4.bateria.wav" "output/$FILE_NAME/3.baixo.wav" "output/$FILE_NAME/1.melodia.wav" -x "output/$FILE_NAME/$FILE_NAME.wav" -t "output/$FILE_NAME/tags.json" -m "/content/teste/metadata.json" -f alac
+    "/content/teste/ni-stem/ni-stem" create -s "output/$FILE_NAME/1.melodia.wav" "output/$FILE_NAME/2.vocais.wav" "output/$FILE_NAME/3.baixo.wav" "output/$FILE_NAME/4.bateria.wav" -x "output/$FILE_NAME/$FILE_NAME.wav" -t "output/$FILE_NAME/tags.json" -m "/content/teste/metadata.json" -f alac
 
     echo "Done."
 }
