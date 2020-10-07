@@ -139,7 +139,7 @@ setup() {
         fi
     done
 
-    if [[ $(./ni-stem/ni-stem -h) == "" ]]; then
+    if [[ $(/content/teste/ni-stem/ni-stem -h) == "" ]]; then
         echo "Please install ni-stem before running Stemgen."
         exit 2
     fi
