@@ -8,7 +8,7 @@ LOGO="
 
 "
 
-SUPPORTED_FILES=('.wav' '.mp3' '.wave' '.aif' '.aiff' '.flac')
+SUPPORTED_FILES=('.wav' '.mp3' '.wave' '.aif' '.aiff' '.flac' '.m4a')
 
 USAGE="$LOGO
 Stemgen is a Stem file generator. Convert any track into a stem and have fun with Traktor.
@@ -178,7 +178,11 @@ setup() {
         *.mp3)
             setup_file .mp3
             convert_to_wav
-            ;;    
+            ;;   
+        *.m4a)
+            setup_file .m4a
+            convert_to_wav
+            ;; 
         *)
             echo "Invalid input file format. File should be one of:" ${SUPPORTED_FILES[@]}
             exit 1
