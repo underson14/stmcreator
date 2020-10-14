@@ -11,7 +11,7 @@ import subprocess
 import sys
 
 stemDescription  = 'stem-meta'
-stemOutExtension = ".mp4"
+stemOutExtension = ".m4a"
 
 _windows = platform.system() == "Windows"
 
@@ -92,7 +92,7 @@ class StemCreator:
             print("\nconverting " + trackPath + " to " + self._format + "...")
             sys.stdout.flush()
 
-            newPath = trackName + ".mp4"
+            newPath = trackName + ".m4a"
             _removeFile(newPath)
 
             converter = os.path.join(_getProgramPath(), "avconv_win", "avconv.exe") if _windows else "ffmpeg"
