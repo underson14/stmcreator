@@ -149,11 +149,23 @@ class StemCreator:
 
         tags = mutagen.mp4.Open(outputFilePath)
         if ("track" in self._tags) and (len(self._tags["track"]) > 0):
-            tags["\xa9nam"] = self._tags["track"]
+            tags["\xa9nam"] = self._tags["track"]    
         if ("artist" in self._tags) and (len(self._tags["artist"]) > 0):
             tags["\xa9ART"] = self._tags["artist"]
-        if ("release" in self._tags) and (len(self._tags["release"]) > 0):
-            tags["\xa9alb"] = self._tags["release"]
+        if ("album" in self._tags) and (len(self._tags["album"]) > 0):
+            tags["\xa9alb"] = self._tags["album"]
+        if ("comment" in self._tags) and (len(self._tags["comment"]) > 0):
+            tags["\xA9cmt"] = self._tags["comment"]       
+        if ("lyrics" in self._tags) and (len(self._tags["lyrics"]) > 0):
+            tags["\xA9lyr"] = self._tags["lyrics"]    
+        if ("grouping" in self._tags) and (len(self._tags["grouping"]) > 0):
+            tags["\xA9grp"] = self._tags["grouping"]    
+        if ("tempo" in self._tags) and (len(self._tags["tempo"]) > 0):
+            tags["\xA9tmpo"] = self._tags["tempo"] 
+        if ("rating" in self._tags) and (len(self._tags["rating"]) > 0):
+            tags["\xA9rtng"] = self._tags["rating"]   
+        if ("composer" in self._tags) and (len(self._tags["composer"]) > 0):
+            tags["\xA9wrt"] = self._tags["composer"] 
         if ("remixer" in self._tags) and (len(self._tags["remixer"]) > 0):
             tags["----:com.apple.iTunes:REMIXER"] = mutagen.mp4.MP4FreeForm(self._tags["remixer"])
         if ("mix" in self._tags) and (len(self._tags["mix"]) > 0):
