@@ -148,8 +148,8 @@ class StemCreator:
         sys.stdout.flush()
 
         tags = mutagen.mp4.Open(outputFilePath)
-        if ("track" in self._tags) and (len(self._tags["track"]) > 0):
-            tags["\xa9nam"] = self._tags["track"]    
+        if ("name" in self._tags) and (len(self._tags["name"]) > 0):
+            tags["\xa9nam"] = self._tags["name"]     
         if ("artist" in self._tags) and (len(self._tags["artist"]) > 0):
             tags["\xa9ART"] = self._tags["artist"]
         if ("album" in self._tags) and (len(self._tags["album"]) > 0):
@@ -181,8 +181,8 @@ class StemCreator:
                 tags["trkn"] = [(int(self._tags["track_no"]), int(self._tags["track_count"]))] #self._tags["track_no"]
         if ("catalog_no" in self._tags) and (len(self._tags["catalog_no"]) > 0):
             tags["----:com.apple.iTunes:CATALOGNUMBER"] = mutagen.mp4.MP4FreeForm(self._tags["catalog_no"])
-        if ("year" in self._tags) and (len(self._tags["year"]) > 0):
-            tags["\xa9day"] = self._tags["year"]
+        if ("date" in self._tags) and (len(self._tags["date"]) > 0):
+            tags["\xa9day"] = self._tags["date"]
         if ("isrc" in self._tags) and (len(self._tags["isrc"]) > 0):
             tags["TSRC"] = mutagen.id3.TSRC(encoding=None, text=self._tags["isrc"])
             tags["----:com.apple.iTunes:ISRC"] = mutagen.mp4.MP4FreeForm(self._tags["isrc"])
