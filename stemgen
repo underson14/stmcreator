@@ -1,14 +1,6 @@
 #!/bin/bash
 
-LOGO="
- _____ _____ _____ _____ _____ _____ _____ 
-|   __|_   _|   __|     |   __|   __|   | |
-|__   | | | |   __| | | |  |  |   __| | | |
-|_____| |_| |_____|_|_|_|_____|_____|_|___|
-
-"
-
-SUPPORTED_FILES=('.wav' '.mp3' '.wave' '.aif' '.aiff' '.flac' '.m4a')
+SUPPORTED_FILES=('.wav' '.mp3' '.wave' '.aif' '.aiff' '.flac' '.m4a' '.mp4')
 
 USAGE="$LOGO
 Stemgen is a Stem file generator. Convert any track into a stem and have fun with Traktor.
@@ -68,7 +60,7 @@ create_tags_json() {
             # Add meta `title` as `track` for `ni-stem`
             tags+=("track=${value}")
         elif [[ $title == "artist" ]] || [[ $title == "label" ]] ||
-           [[ $title == "genre" ]] || [[ $title == "release" ]] || [[ $title == "album" ]]; then
+           [[ $title == "genre" ]] || [[ $title == "release" ]] || [[ $title == "RELEASETIME" ]] || [[ $title == "date" ]] || [[ $title == "URL" ]] || [[ $title == "INVOLVEDPEOPLELIST" ]] || [[ $title == "lyrics" ]] || [[ $title == "album" ]] || [[ $title == "comment" ]] || [[ $title == "album_artist" ]] || [[ $title == "publisher" ]] || [[ $title == "initialkey" ]] || [[ $title == "RELEASETIME" ]] || [[ $title == "track" ]]; then
             tags+=("${title}=${value}")
         fi
     done < metadata.txt
@@ -181,6 +173,10 @@ setup() {
             ;;   
         *.m4a)
             setup_file .m4a
+            convert_to_wav
+            ;; 
+        *.mp4)
+            setup_file .mp4
             convert_to_wav
             ;; 
         *)
