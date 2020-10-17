@@ -56,7 +56,7 @@ create_tags_json() {
         title=${tag%%=*}
         title=$(echo "$title" | awk '{ print tolower($0) }')
         value=${tag##*=}
-        if [[ $title == "track" ]]; then
+        if [[ $title == "title" ]]; then
             # Add meta `title` as `track` for `ni-stem`
             tags+=("track=${value}")
         elif [[ $title == "artist" ]] || [[ $title == "label" ]] ||
