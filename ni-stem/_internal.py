@@ -149,7 +149,7 @@ class StemCreator:
 
         tags = mutagen.mp4.Open(outputFilePath)
         if ("track" in self._tags) and (len(self._tags["track"]) > 0):
-            tags["\xa9nam"] = self._tags["track"]     
+            tags["\xa9nam"] = self._tags["track"]    
         if ("artist" in self._tags) and (len(self._tags["artist"]) > 0):
             tags["\xa9ART"] = self._tags["artist"]
         if ("album" in self._tags) and (len(self._tags["album"]) > 0):
