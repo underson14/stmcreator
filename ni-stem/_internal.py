@@ -152,8 +152,10 @@ class StemCreator:
             tags["\xa9nam"] = self._tags["track"]
         if ("artist" in self._tags) and (len(self._tags["artist"]) > 0):
             tags["\xa9ART"] = self._tags["artist"]
-        if ("release" in self._tags) and (len(self._tags["release"]) > 0):
-            tags["\xa9alb"] = self._tags["release"]
+        if ("comment" in self._tags) and (len(self._tags["comment"]) > 0):
+            tags["\xA9cmt"] = self._tags["comment"]
+        if ("album" in self._tags) and (len(self._tags["album"]) > 0):
+            tags["\xa9alb"] = self._tags["album"]
         if ("remixer" in self._tags) and (len(self._tags["remixer"]) > 0):
             tags["----:com.apple.iTunes:REMIXER"] = mutagen.mp4.MP4FreeForm(self._tags["remixer"])
         if ("mix" in self._tags) and (len(self._tags["mix"]) > 0):
