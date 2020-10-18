@@ -59,7 +59,11 @@ create_tags_json() {
         if [[ $title == "title" ]]; then
             # Add meta `title` as `track` for `ni-stem`
             tags+=("track=${value}")
-        elif [[ $title == "artist" ]] || [[ $title == "label" ]] || [[ $title == "genre" ]] || [ $title == "release" ]] || [[ $title == "date" ]] || [[ $title == "lyrics" ]] || [[ $title == "album" ]] || [[ $title == "comment" ]] || [[ $title == "publisher" ]]; then  
+        elif [[ $title == "artist" ]] || [[ $title == "label" ]] ||
+        [[ $title == "genre" ]] || [ $title == "release" ]] ||
+        [[ $title == "date" ]] || [[ $title == "lyrics" ]] ||
+        [[ $title == "album" ]] || [[ $title == "comment" ]] ||
+        [[ $title == "publisher" ]]; then  
             tags+=("${title}=${value}")
         fi
     done < metadata.txt
