@@ -515,6 +515,8 @@ class ID3(DictProxy, mutagen.Metadata):
                 raise
             f = open(filename, 'ab')  # create, then reopen
             f = open(filename, 'rb+')
+            f.close()
+            # test text mode
         try:
             idata = f.read(10)
 
