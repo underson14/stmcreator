@@ -167,8 +167,6 @@ class StreamInfo(MetadataBlock, mutagen.StreamInfo):
                     self.total_samples == other.total_samples)
         except:
             return False
-    def __ne__(self, other):
-        return not self == other
     
     __hash__ = MetadataBlock.__hash__
 
@@ -378,7 +376,9 @@ class CueSheetTrack(object):
                     self.indexes == other.indexes)
         except (AttributeError, TypeError):
             return False
-
+    def __ne__(self, other):
+        return not self == other
+    
     __hash__ = object.__hash__
 
     def __repr__(self):
