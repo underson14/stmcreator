@@ -167,7 +167,9 @@ class StreamInfo(MetadataBlock, mutagen.StreamInfo):
                     self.total_samples == other.total_samples)
         except:
             return False
-
+    def __ne__(self, other):
+        return not self == other
+    
     __hash__ = MetadataBlock.__hash__
 
     def load(self, data):
