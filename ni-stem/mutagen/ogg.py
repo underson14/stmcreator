@@ -108,7 +108,7 @@ class OggPage(object):
         if [len(p) for p in self.packets] != lacings:
             raise error("unable to read full data")
 
-    def __eq__(self, other):
+    def __ne__(self, other):
         """Two Ogg pages are the same if they write the same data."""
         try:
             return (self.write() == other.write())
