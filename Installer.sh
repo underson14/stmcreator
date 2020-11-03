@@ -1,8 +1,8 @@
 apt install ffmpeg
 apt install gpac
 apt install -y jo
-pip3 install tensorflow-gpu --use-feature=2020-resolver
-pip3 install spleeter --use-feature=2020-resolver
+pip install tensorflow-gpu
+pip install spleeter
 cd /content/teste
 unzip "/content/teste/ni-stem/gpac.zip"
 mv "/content/teste/gpac/" "/content/teste/ni-stem/"
