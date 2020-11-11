@@ -90,7 +90,9 @@ split_song() {
 create_stem() {
     echo "Creating stem..."
 
-"/content/teste/ni-stem/ni-stem" create -s "output/$FILE_NAME/1.melodia.m4a" "output/$FILE_NAME/2.vocais.m4a" "output/$FILE_NAME/3.baixo.m4a" "output/$FILE_NAME/4.bateria.m4a" -x "output/$FILE_NAME/$FILE_NAME.wav" -t "output/$FILE_NAME/tags.json" -m "/content/teste/metadata.json"  echo "Done."
+    "/content/teste/ni-stem/ni-stem" create -s "output/$FILE_NAME/1.melodia.m4a" "output/$FILE_NAME/2.vocais.m4a" "output/$FILE_NAME/3.baixo.m4a" "output/$FILE_NAME/4.bateria.m4a" -x "output/$FILE_NAME/$FILE_NAME.wav" -t "output/$FILE_NAME/tags.json" -m "/content/teste/metadata.json"  
+
+    echo "Done."
 }
 
 clean_dir() {
