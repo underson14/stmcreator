@@ -4,6 +4,7 @@ apt install -y jo
 wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
 apt-get install -y atomicparsley
 pip install -U kora
+pip3 install tidal-dl --upgrade
 pip install tensorflow-gpu
 pip install spleeter
 cd /content/teste
