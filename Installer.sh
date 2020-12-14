@@ -8,7 +8,7 @@ pip3 install tidal-dl --upgrade
 pip install numpy==1.18.5
 pip install tensorflow-estimator==2.3.0
 pip install folium==0.2.1
-pip install imgaug==0.2.7
+pip install imgaug==0.2.9
 pip install tensorflow-gpu
 pip install spleeter
 cd /content/teste
