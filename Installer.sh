@@ -5,6 +5,10 @@ wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
 apt-get install -y atomicparsley
 pip install -U kora
 pip3 install tidal-dl --upgrade
+pip install numpy==1.19.2
+pip install tensorflow-estimator==2.4.0rc0
+pip install folium==0.2.1
+pip install imgaug==0.2.5
 pip install tensorflow-gpu
 pip install spleeter
 cd /content/teste
