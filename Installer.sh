@@ -5,8 +5,12 @@ wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
 apt-get install -y atomicparsley
 pip install -U kora
 pip3 install tidal-dl --upgrade
+pip install grpcio==1.32.0
+pip install numpy==1.19.4
+pip install tensorboard==2.4.0
+pip install tensorflow-estimator==2.4.0
+pip install tensorflow==gpu-2.4.0
 pip install spleeter
-pip install tensorflow-gpu
 cd /content/teste
 unzip "/content/teste/ni-stem/gpac.zip"
 mv "/content/teste/gpac/" "/content/teste/ni-stem/"
