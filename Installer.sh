@@ -1,6 +1,5 @@
 apt install ffmpeg
 apt install gpac
-apt install -y jo
 wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
 apt-get install -y atomicparsley
 pip install -U kora
@@ -24,3 +23,10 @@ chmod -R 755 "/content/teste/video.sh"
 chmod -R 755 "/content/teste/mp3.sh"
 chmod -R 755 "/content/drive/MyDrive/Videos"
 chmod -R 755 "/content/drive/MyDrive/MP3"
+cd
+git clone git://github.com/jpmens/jo.git
+cd jo
+autoreconf -i
+./configure
+make check
+make install
