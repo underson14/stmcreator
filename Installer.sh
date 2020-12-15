@@ -22,10 +22,4 @@ chmod -R 755 "/content/teste/video.sh"
 chmod -R 755 "/content/teste/mp3.sh"
 chmod -R 755 "/content/drive/MyDrive/Videos"
 chmod -R 755 "/content/drive/MyDrive/MP3"
-cd /content/
-git clone git://github.com/jpmens/jo.git
-cd /content/jo
-autoreconf -i
-./configure
-make check
-make install
+apt install jo
