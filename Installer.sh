@@ -2,7 +2,6 @@ apt install ffmpeg
 apt install gpac
 wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
 apt-get install -y atomicparsley
-pip install -U kora
 pip3 install tidal-dl --upgrade
 pip install grpcio==1.32.0
 pip install numpy==1.19.4
@@ -23,9 +22,9 @@ chmod -R 755 "/content/teste/video.sh"
 chmod -R 755 "/content/teste/mp3.sh"
 chmod -R 755 "/content/drive/MyDrive/Videos"
 chmod -R 755 "/content/drive/MyDrive/MP3"
-cd
+cd /content/
 git clone git://github.com/jpmens/jo.git
-cd jo
+cd /content/jo
 autoreconf -i
 ./configure
 make check
