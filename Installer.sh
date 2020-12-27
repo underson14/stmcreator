@@ -1,7 +1,7 @@
 apt install ffmpeg
 apt install gpac
 pip3 install tidal-dl --upgrade
-pip uninstall tensorflow==2.4.0
+pip uninstall tensorflow==2.4.0 -y
 pip install spleeter
 pip install tensorflow-gpu==2.3.0
 cd /content/teste
