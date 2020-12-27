@@ -1,9 +1,16 @@
+pip uninstall folium -y
+pip uninstall imgaug -y
+pip install folium==0.2.1
+pip install imgaug==0.2.5
 apt install ffmpeg
+pip uninstall librosa -y
+pip uninstall numpy -y
+pip uninstall pandas -y
+pip uninstall tensorflow -y
+pip uninstall tensorflow-estimator -y
+pip install spleeter
 apt install gpac
 pip3 install tidal-dl --upgrade
-pip uninstall tensorflow==2.4.0 -y
-pip install tensorflow-gpu==2.3.0
-pip install spleeter
 cd /content/teste
 unzip "/content/teste/ni-stem/gpac.zip"
 mv "/content/teste/gpac/" "/content/teste/ni-stem/"
