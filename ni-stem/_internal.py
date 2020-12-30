@@ -160,8 +160,12 @@ class StemCreator:
             tags["----:com.apple.iTunes:REMIXER"] = mutagen.mp4.MP4FreeForm(self._tags["remixer"])
         if ("mix" in self._tags) and (len(self._tags["mix"]) > 0):
             tags["----:com.apple.iTunes:MIXER"] = mutagen.mp4.MP4FreeForm(self._tags["mix"])
+        if ("lyrics" in self._tags) and (len(self._tags["lyrics"]) > 0):
+            tags["----:com.apple.iTunes:LYRICS"] = mutagen.mp4.MP4FreeForm(self._tags["lyrics"])
+        if ("url" in self._tags) and (len(self._tags["url"]) > 0):
+            tags["----:com.apple.iTunes:URL"] = mutagen.mp4.MP4FreeForm(self._tags["url"])
         if ("producer" in self._tags) and (len(self._tags["producer"]) > 0):
-            tags["----:com.apple.iTunes:PRODUCER"] = self._tags["producer"]
+            tags["----:com.apple.iTunes:PRODUCER"] = mutagen.mp4.MP4FreeForm(self._tags["producer"])
         if ("label" in self._tags) and (len(self._tags["label"]) > 0):
             tags["----:com.apple.iTunes:LABEL"] = mutagen.mp4.MP4FreeForm(self._tags["label"])
         if ("genre" in self._tags) and (len(self._tags["genre"]) > 0):
