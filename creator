@@ -19,7 +19,7 @@ FILE_EXTENSION=
 get_cover() {
     echo "Extracting cover..."
 
-    ffmpeg -i "$INPUT_PATH" -an -vcodec copy "output/$FILE_NAME/cover.jpg" -y
+    ffmpeg -i "$INPUT_PATH" -an -vcodec copy "stems/$FILE_NAME/cover.jpg" -y
 
     echo "Done."
 }
@@ -27,7 +27,7 @@ get_cover() {
 get_metadata() {
     echo "Extracting metadata..."
 
-    ffmpeg -i "$INPUT_PATH" -f ffmetadata "output/$FILE_NAME/metadata.txt" -y
+    ffmpeg -i "$INPUT_PATH" -f ffmetadata "stems/$FILE_NAME/metadata.txt" -y
 
     echo "Done."
 }
@@ -35,7 +35,7 @@ get_metadata() {
 convert_to_wav() {
     echo "Converting to wav..."
 
-    ffmpeg -i "$INPUT_PATH" -map_metadata 0:s:0 "output/$FILE_NAME/$FILE_NAME.wav" -y
+    ffmpeg -i "$INPUT_PATH" -map_metadata 0:s:0 "stems/$FILE_NAME/$FILE_NAME.wav" -y
 
     echo "Done."
 }
@@ -43,7 +43,7 @@ convert_to_wav() {
 create_tags_json() {
     echo "Creating tags.json..."
 
-    cd "output/$FILE_NAME"
+    cd "stems/$FILE_NAME"
 
     local path=$( cd "$(dirname "$FILE_NAME")" >/dev/null 2>&1 ; pwd -P )
 
@@ -92,7 +92,7 @@ split_song() {
 create_stem() {
     echo "Creating stem..."
 
-    "/content/teste/ni-stem/ni-stem" create -s "output/$FILE_NAME/1.melodia.m4a" "output/$FILE_NAME/2.vocais.m4a" "output/$FILE_NAME/3.baixo.m4a" "output/$FILE_NAME/4.bateria.m4a" -x "output/$FILE_NAME/$FILE_NAME.wav" -t "output/$FILE_NAME/tags.json" -m "/content/teste/metadata.json" 
+    "/content/teste/ni-stem/ni-stem" create -s "stems/$FILE_NAME/1.melodia.m4a" "stems/$FILE_NAME/2.vocais.m4a" "stems/$FILE_NAME/3.baixo.m4a" "stems/$FILE_NAME/4.bateria.m4a" -x "stems/$FILE_NAME/$FILE_NAME.wav" -t "stems/$FILE_NAME/tags.json" -m "/content/teste/metadata.json" 
     
     echo "Done."
 }
@@ -100,7 +100,7 @@ create_stem() {
 clean_dir() {
     echo "Cleaning..."
 
-    cd "output/$FILE_NAME"
+    cd "stems/$FILE_NAME"
     if [[ -f "$FILE_NAME.stem.m4a" ]]; then
         mv "$FILE_NAME.stem.m4a" ..
     else
@@ -117,10 +117,10 @@ setup_file() {
     FILE_EXTENSION=$1
     FILE_NAME=${BASE_PATH%"$FILE_EXTENSION"}
 
-    if [[ -d "output/$FILE_NAME" ]]; then
+    if [[ -d "stems/$FILE_NAME" ]]; then
         echo "Working dir already created."
     else
-        mkdir "output/$FILE_NAME"
+        mkdir "stems/$FILE_NAME"
         echo "Working dir created."
     fi
 }
@@ -151,11 +151,11 @@ setup() {
     case "$INPUT_PATH" in
         *.wave)
             setup_file .wave
-            cp "$INPUT_PATH" "output/$FILE_NAME/$FILE_NAME.wav"
+            cp "$INPUT_PATH" "stems/$FILE_NAME/$FILE_NAME.wav"
             ;;
         *.wav)
             setup_file .wav
-            cp "$INPUT_PATH" "output/$FILE_NAME/$FILE_NAME.wav"
+            cp "$INPUT_PATH" "stems/$FILE_NAME/$FILE_NAME.wav"
             ;;
         *.aiff)
             setup_file .aiff
