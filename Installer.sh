@@ -1,14 +1,5 @@
-pip uninstall folium -y
-pip uninstall imgaug -y
-pip install folium==0.2.1
-pip install imgaug==0.2.5
 apt install ffmpeg
-pip uninstall librosa -y
-pip uninstall numpy -y
-pip uninstall pandas -y
-pip uninstall tensorflow -y
-pip uninstall tensorflow-estimator -y
-pip install spleeter
+pip3 install spleeter
 apt install gpac
 pip3 install tidal-dl --upgrade
 cd /content/teste
