@@ -28,7 +28,7 @@ pip3 install numba==0.48.0
 pip3 install tensorflow-gpu==1.15.2
 conda install -c conda-forge spleeter-gpu --yes
 pip3 install spleeter
-apt install gpac
+apt install -y gpac 
 cd /content/teste
 unzip "/content/teste/ni-stem/gpac.zip"
 mv "/content/teste/gpac/" "/content/teste/ni-stem/"
@@ -37,5 +37,5 @@ chmod -R 755 "/content/teste/ni-stem/gpac/"
 chmod -R 755 "/content/teste/creator"
 rm -rf "/content/teste/__MACOSX"
 rm -rf "/content/teste/ni-stem/gpac.zip"
-apt install jo
-apt-get install -y atomicparsley
+apt install -y jo
+apt install -y atomicparsley
