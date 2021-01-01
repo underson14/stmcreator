@@ -9,6 +9,8 @@ conda update --channel defaults --all --yes
 
 conda config --add channels conda-forge
 
+python -m pip install --upgrade pip
+
 pip3 uninstall folium -y
 pip3 uninstall imgaug -y
 pip3 install folium==0.2.1
