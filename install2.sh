@@ -29,7 +29,7 @@ pip3 install pandas==0.25.1
 pip3 install numba==0.48.0
 pip3 install tensorflow-gpu==1.15.2
 conda install -c conda-forge spleeter-gpu --yes
-pip3 install spleeter --use-feature=2020-resolver
+pip3 install spleeter
 apt install gpac
 pip3 install tidal-dl --upgrade
 cd /content/teste
