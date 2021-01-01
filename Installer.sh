@@ -1,5 +1,6 @@
 apt install ffmpeg
-pip3 install spleeter
+pip3 install pydub
+pip3 install spleeter-gpu
 apt install gpac
 pip3 install tidal-dl --upgrade
 cd /content/teste
