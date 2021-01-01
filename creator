@@ -139,11 +139,11 @@ setup() {
         exit 2
     fi
 
-    if [[ -d output ]]; then
-        echo "Output dir already created."
+    if [[ -d stems ]]; then
+        echo "Stems dir already created."
     else
-        mkdir output
-        echo "Output dir created."
+        mkdir stems
+        echo "Stems dir created."
     fi
 
     BASE_PATH=${INPUT_PATH##*/}
