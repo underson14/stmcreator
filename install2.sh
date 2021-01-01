@@ -10,20 +10,20 @@ conda update --channel defaults --all --yes
 conda config --add channels conda-forge
 
 pip3 uninstall folium -y
-pip3 uninstall imgaug -y
 pip3 install folium==0.2.1
+pip3 uninstall imgaug -y
 pip3 install imgaug==0.2.5
 pip3 uninstall librosa -y
-pip3 uninstall panda -y
-pip3 uninstall tensorboard -y
-pip3 uninstall tensorflow-estimator -y
-pip3 uninstall gast -y 
-pip3 uninstall numba
-pip3 install gast==0.2.2
-pip3 install tensorboard==1.15.0
-pip3 install tensorflow-estimator==1.15.1
 pip3 install librosa==0.7.2
+pip3 uninstall panda -y
 pip3 install pandas==0.25.1
+pip3 uninstall tensorboard -y
+pip3 install tensorboard==1.15.0
+pip3 uninstall tensorflow-estimator -y
+pip3 install tensorflow-estimator==1.15.1
+pip3 uninstall gast -y
+pip3 install gast==0.2.2
+pip3 uninstall numba
 pip3 install numba==0.48.0
 pip3 install tensorflow-gpu==1.15.2
 conda install -c conda-forge spleeter-gpu --yes
