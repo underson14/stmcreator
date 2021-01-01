@@ -23,7 +23,7 @@ pip3 uninstall tensorflow-estimator -y
 pip3 install tensorflow-estimator==1.15.1
 pip3 uninstall gast -y
 pip3 install gast==0.2.2
-pip3 uninstall numba
+pip3 uninstall numba -y
 pip3 install numba==0.48.0
 pip3 install tensorflow-gpu==1.15.2
 conda install -c conda-forge spleeter-gpu --yes
