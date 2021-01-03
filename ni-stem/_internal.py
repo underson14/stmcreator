@@ -168,8 +168,8 @@ class StemCreator:
             tags["----:com.apple.iTunes:LABEL"] = mutagen.mp4.MP4FreeForm(self._tags["label"])
         if ("genre" in self._tags) and (len(self._tags["genre"]) > 0):
             tags["\xa9gen"] = self._tags["genre"]
-        if ("RELEASETIME" in self._tags) and (len(self._tags["RELEASETIME"]) > 0):
-            tags["----:com.apple.iTunes:RELEASETIME"] = mutagen.mp4.MP4FreeForm(self._tags["RELEASETIME"])
+        if ("releasetime" in self._tags) and (len(self._tags["releasetime"]) > 0):
+            tags["----:com.apple.iTunes:RELEASETIME"] = mutagen.mp4.MP4FreeForm(self._tags["releasetime"])
         if ("date" in self._tags) and (len(self._tags["date"]) > 0):
             tags["\xa9day"] = self._tags["year"]
         if ("isrc" in self._tags) and (len(self._tags["isrc"]) > 0):
