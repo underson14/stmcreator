@@ -1,3 +1,4 @@
+python -m pip install --upgrade pip
 pip3 uninstall folium -y
 pip3 install folium==0.2.1
 pip3 uninstall imgaug -y
