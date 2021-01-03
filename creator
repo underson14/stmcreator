@@ -3,7 +3,7 @@
 SUPPORTED_FILES=('.wav' '.mp3' '.wave' '.aif' '.aiff' '.flac' '.m4a' '.mp4')
 
 USAGE="$LOGO
-Stemcreator is a Stem file generator. Convert any track into a stem and have fun with Traktor.
+Stemcreator e um criador de stems.
 
 Usage: $0 -i [path]
 
@@ -101,8 +101,8 @@ clean_dir() {
     echo "Limpando..."
 
     cd "stems/$FILE_NAME"
-    if [[ -f "$FILE_NAME.stem.m4a" ]]; then
-        mv "$FILE_NAME.stem.m4a" ..
+    if [[ -f "$FILE_NAME.stem.mp4" ]]; then
+        mv "$FILE_NAME.stem.mp4" ..
     else
         echo "Erro."
         exit 2
