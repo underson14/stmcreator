@@ -86,7 +86,7 @@ split_song() {
 
     spleeter separate -B tensorflow -i "$INPUT_PATH" -p "/content/teste/base_config.json" -o stems -c m4a -b 320k
 
-    echo "Feiro."
+    echo "Feito."
 }
 
 create_stem() {
@@ -101,8 +101,8 @@ clean_dir() {
     echo "Limpando..."
 
     cd "stems/$FILE_NAME"
-    if [[ -f "$FILE_NAME.stem.mp4" ]]; then
-        mv "$FILE_NAME.stem.mp4" ..
+    if [[ -f "$FILE_NAME.stem.m4a" ]]; then
+        mv "$FILE_NAME.stem.m4a" ..
     else
         echo "Erro."
         exit 2
