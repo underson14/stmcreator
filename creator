@@ -101,8 +101,8 @@ clean_dir() {
     echo "Limpando..."
 
     cd "stems/$FILE_NAME"
-    if [[ -f "$FILE_NAME.stem.mp4" ]]; then
-        mv "$FILE_NAME.stem.mp4" ..
+    if [[ -f "$FILE_NAME.stem.m4a" ]]; then
+        mv "$FILE_NAME.stem.m4a" ..
     else
         echo "Erro."
         exit 2
@@ -187,7 +187,7 @@ setup() {
             ;;
     esac
 
-    echo "Prontp!"
+    echo "Pronto!"
 }
 
 run() {
