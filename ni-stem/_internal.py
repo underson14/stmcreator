@@ -157,24 +157,19 @@ class StemCreator:
         if ("album" in self._tags) and (len(self._tags["album"]) > 0):
             tags["\xa9alb"] = self._tags["album"]
         if ("album_artist" in self._tags) and (len(self._tags["album_artist"]) > 0):
-            tags["\xa9aART"] = self._tags["album_artist"]
-        if ("mix" in self._tags) and (len(self._tags["mix"]) > 0):
-            tags["----:com.apple.iTunes:MIXER"] = mutagen.mp4.MP4FreeForm(self._tags["mix"])
+            tags["\aART"] = self._tags["album_artist"]
+        if ("initialkey" in self._tags) and (len(self._tags["initialkey"]) > 0):
+            tags["----:com.apple.iTunes:INITIALKEY"] = mutagen.mp4.MP4FreeForm(self._tags["initialkey"])
         if ("lyrics" in self._tags) and (len(self._tags["lyrics"]) > 0):
             tags["\xA9lyr"] = mutagen.mp4.MP4FreeForm(self._tags["lyrics"])
         if ("url" in self._tags) and (len(self._tags["url"]) > 0):
-            tags["----:com.apple.iTunes:URL"] = mutagen.mp4.MP4FreeForm(self._tags["url"])
-        if ("producer" in self._tags) and (len(self._tags["producer"]) > 0):
-            tags["----:com.apple.iTunes:PRODUCER"] = mutagen.mp4.MP4FreeForm(self._tags["producer"])
+            tags["\xA9url"] = mutagen.mp4.MP4FreeForm(self._tags["url"])      
         if ("label" in self._tags) and (len(self._tags["label"]) > 0):
             tags["----:com.apple.iTunes:LABEL"] = mutagen.mp4.MP4FreeForm(self._tags["label"])
         if ("genre" in self._tags) and (len(self._tags["genre"]) > 0):
             tags["\xa9gen"] = self._tags["genre"]
-        if ("track_no" in self._tags) and (len(self._tags["track_no"]) > 0):
-            if ("track_count" in self._tags) and (len(self._tags["track_count"]) > 0):
-                tags["trkn"] = [(int(self._tags["track_no"]), int(self._tags["track_count"]))] #self._tags["track_no"]
-        if ("catalog_no" in self._tags) and (len(self._tags["catalog_no"]) > 0):
-            tags["----:com.apple.iTunes:CATALOGNUMBER"] = mutagen.mp4.MP4FreeForm(self._tags["catalog_no"])
+        if ("RELEASETIME" in self._tags) and (len(self._tags["RELEASETIME"]) > 0):
+            tags["----:com.apple.iTunes:RELEASETIME"] = mutagen.mp4.MP4FreeForm(self._tags["RELEASETIME"])
         if ("date" in self._tags) and (len(self._tags["date"]) > 0):
             tags["\xa9day"] = self._tags["year"]
         if ("isrc" in self._tags) and (len(self._tags["isrc"]) > 0):
