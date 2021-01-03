@@ -61,8 +61,8 @@ create_tags_json() {
             tags+=("track=${value}")
         elif [[ $title == "artist" ]] || [[ $title == "label" ]] ||
              [[ $title == "lyrics" ]] || [[ $title == "isrc" ]] ||
-            [[ $title == "RELEASETIME" ]] || [[ $title == "album" ]] ||
-            [[ $title == "comment" ]] || [[ $title == "album" ]] ||
+            [[ $title == "releasetime" ]] || [[ $title == "album" ]] ||
+            [[ $title == "comment" ]] || [[ $title == "release" ]] ||
             [[ $title == "album_artist" ]] || [[ $title == "initialkey" ]] ||
            [[ $title == "genre" ]] || [[ $title == "url" ]]; then
             tags+=("${title}=${value}")
