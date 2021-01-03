@@ -3,13 +3,13 @@
 SUPPORTED_FILES=('.wav' '.mp3' '.wave' '.aif' '.aiff' '.flac' '.m4a' '.mp4')
 
 USAGE="$LOGO
-Stemgen is a Stem file generator. Convert any track into a stem and have fun with Traktor.
+Stemcreator is a Stem file generator. Convert any track into a stem and have fun with Traktor.
 
 Usage: $0 -i [path]
 
 Supported input file format: ${SUPPORTED_FILES[@]}
 "
-VERSION=1.0.0
+VERSION=2.0.0
 
 INPUT_PATH=
 BASE_PATH=
@@ -17,7 +17,7 @@ FILE_NAME=
 FILE_EXTENSION=
 
 get_cover() {
-    echo "Extracting cover..."
+    echo "Extraindo capa..."
 
     ffmpeg -i "$INPUT_PATH" -an -vcodec copy "stems/$FILE_NAME/cover.jpg" -y
 
@@ -25,7 +25,7 @@ get_cover() {
 }
 
 get_metadata() {
-    echo "Extracting metadata..."
+    echo "Extraindo metadata..."
 
     ffmpeg -i "$INPUT_PATH" -f ffmetadata "stems/$FILE_NAME/metadata.txt" -y
 
@@ -33,7 +33,7 @@ get_metadata() {
 }
 
 convert_to_wav() {
-    echo "Converting to wav..."
+    echo "Convertendo para wav..."
 
     ffmpeg -i "$INPUT_PATH" -map_metadata 0:s:0 "stems/$FILE_NAME/$FILE_NAME.wav" -y
 
@@ -41,7 +41,7 @@ convert_to_wav() {
 }
 
 create_tags_json() {
-    echo "Creating tags.json..."
+    echo "Criando tags.json..."
 
     cd "stems/$FILE_NAME"
 
@@ -82,35 +82,35 @@ create_tags_json() {
 }
 
 split_song() {
-    echo "Splitting song..."
+    echo "Separando faixas..."
 
     spleeter separate -B tensorflow -i "$INPUT_PATH" -p "/content/teste/base_config.json" -o stems -c m4a -b 320k
 
-    echo "Done."
+    echo "Feiro."
 }
 
 create_stem() {
-    echo "Creating stem..."
+    echo "Criando stem..."
 
     "/content/teste/ni-stem/ni-stem" create -s "stems/$FILE_NAME/1.melodia.m4a" "stems/$FILE_NAME/2.vocais.m4a" "stems/$FILE_NAME/3.baixo.m4a" "stems/$FILE_NAME/4.bateria.m4a" -x "stems/$FILE_NAME/$FILE_NAME.wav" -t "stems/$FILE_NAME/tags.json" -m "/content/teste/metadata.json" 
     
-    echo "Done."
+    echo "Feito."
 }
 
 clean_dir() {
-    echo "Cleaning..."
+    echo "Limpando..."
 
     cd "stems/$FILE_NAME"
     if [[ -f "$FILE_NAME.stem.m4a" ]]; then
         mv "$FILE_NAME.stem.m4a" ..
     else
-        echo "Error."
+        echo "Erro."
         exit 2
     fi
     cd ..
     rm -rf "$FILE_NAME"
 
-    echo "Done."
+    echo "Feito."
 }
 
 setup_file() {
@@ -118,10 +118,10 @@ setup_file() {
     FILE_NAME=${BASE_PATH%"$FILE_EXTENSION"}
 
     if [[ -d "stems/$FILE_NAME" ]]; then
-        echo "Working dir already created."
+        echo "Pasta ja criada."
     else
         mkdir "stems/$FILE_NAME"
-        echo "Working dir created."
+        echo "Pasta criada."
     fi
 }
 
@@ -129,21 +129,21 @@ setup() {
     packages=('ffmpeg' 'spleeter' 'jo')
     for package in "${packages[@]}"; do
         if [[ $(which $package) == "" ]]; then
-            echo "Please install $package before running Stemgen."
+            echo "Instale $package antes de rodar o Stemcreator."
             exit 2
         fi
     done
 
     if [[ $(/content/teste/ni-stem/ni-stem -h) == "" ]]; then
-        echo "Please install ni-stem before running Stemgen."
+        echo "Instale ni-stem antes de rodar o Stemcreator."
         exit 2
     fi
 
     if [[ -d stems ]]; then
-        echo "Stems dir already created."
+        echo "Pasta de Stems ja criada."
     else
         mkdir stems
-        echo "Stems dir created."
+        echo "Pasta de Stems criada."
     fi
 
     BASE_PATH=${INPUT_PATH##*/}
@@ -182,16 +182,16 @@ setup() {
             convert_to_wav
             ;; 
         *)
-            echo "Invalid input file format. File should be one of:" ${SUPPORTED_FILES[@]}
+            echo "Formato invalido. O arquivo deve ser do tipo:" ${SUPPORTED_FILES[@]}
             exit 1
             ;;
     esac
 
-    echo "Ready!"
+    echo "Prontp!"
 }
 
 run() {
-    echo "Generating a Stem file for $FILE_NAME..."
+    echo "Criando 1 Stem para $FILE_NAME..."
 
     get_cover
     get_metadata
@@ -200,7 +200,7 @@ run() {
     create_stem
     clean_dir
 
-    echo "Success! Have fun"
+    echo "Successo!"
 }
 
 while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
