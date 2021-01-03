@@ -21,7 +21,7 @@ get_cover() {
 
     ffmpeg -i "$INPUT_PATH" -an -vcodec copy "stems/$FILE_NAME/cover.jpg" -y
 
-    echo "Done."
+    echo "Feito."
 }
 
 get_metadata() {
@@ -29,7 +29,7 @@ get_metadata() {
 
     ffmpeg -i "$INPUT_PATH" -f ffmetadata "stems/$FILE_NAME/metadata.txt" -y
 
-    echo "Done."
+    echo "Feito."
 }
 
 convert_to_wav() {
@@ -37,7 +37,7 @@ convert_to_wav() {
 
     ffmpeg -i "$INPUT_PATH" -map_metadata 0:s:0 "stems/$FILE_NAME/$FILE_NAME.wav" -y
 
-    echo "Done."
+    echo "Feito."
 }
 
 create_tags_json() {
@@ -78,7 +78,7 @@ create_tags_json() {
 
     cd ../../
 
-    echo "Done."
+    echo "Feito."
 }
 
 split_song() {
@@ -101,8 +101,8 @@ clean_dir() {
     echo "Limpando..."
 
     cd "stems/$FILE_NAME"
-    if [[ -f "$FILE_NAME.stem.m4a" ]]; then
-        mv "$FILE_NAME.stem.m4a" ..
+    if [[ -f "$FILE_NAME.stem.mp4" ]]; then
+        mv "$FILE_NAME.stem.mp4" ..
     else
         echo "Erro."
         exit 2
