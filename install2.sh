@@ -4,6 +4,8 @@ pip3 uninstall imgaug -y
 pip3 install imgaug==0.2.5
 apt install ffmpeg
 pip3 install pydub
+pip3 uninstall tensorflow==2.4.0 -y
+pip3 install tensorflow==2.3.0
 pip3 install spleeter-gpu
 apt install -y gpac 
 cd /content/teste
