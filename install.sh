@@ -18,3 +18,4 @@ chmod -R 755 "/content/teste/creator"
 rm -rf "/content/teste/__MACOSX"
 rm -rf "/content/teste/ni-stem/gpac.zip"
 apt install -y jo
+apt install -y mediainfo
