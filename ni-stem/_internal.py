@@ -170,8 +170,14 @@ class StemCreator:
             tags["\xa9gen"] = self._tags["genre"]
         if ("date" in self._tags) and (len(self._tags["date"]) > 0):
             tags["\xa9day"] = mutagen.mp4.MP4FreeForm(self._tags["date"])                                           
-        if ("REMIXARTIST" in self._tags) and (len(self._tags["REMIXARTIST"]) > 0):
-            tags["----:com.apple.iTunes:MIXARTIST"] = mutagen.mp4.MP4FreeForm(self._tags["REMIXARTIST"])
+        if ("BEATGRID" in self._tags) and (len(self._tags["BEATGRID"]) > 0):
+            tags["----:com.apple.iTunes:BEATGRID"] = mutagen.mp4.MP4FreeForm(self._tags["BEATGRID"])
+        if ("CUEPOINTS" in self._tags) and (len(self._tags["CUEPOINTS"]) > 0):
+            tags["----:com.apple.iTunes:CUEPOINTS"] = mutagen.mp4.MP4FreeForm(self._tags["CUEPOINTS"])
+        if ("BPM" in self._tags) and (len(self._tags["BPM"]) > 0):
+            tags["tmpo"] = mutagen.mp4.MP4FreeForm(int(self._tags["BPM"]))
+        if ("TRAKTOR4" in self._tags) and (len(self._tags["TRAKTOR4"]) > 0):
+            tags["----:com.apple.iTunes:TRAKTOR4"] = mutagen.mp4.MP4FreeForm(self._tags["TRAKTOR4"])
         if ("releasetime" in self._tags) and (len(self._tags["releasetime"]) > 0):
             tags["----:com.apple.iTunes:RELEASETIME"] = mutagen.mp4.MP4FreeForm(self._tags["releasetime"])
         if ("isrc" in self._tags) and (len(self._tags["isrc"]) > 0):
