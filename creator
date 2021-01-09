@@ -4,9 +4,7 @@ SUPPORTED_FILES=('.wav' '.mp3' '.wave' '.aif' '.aiff' '.flac' '.m4a' '.mp4')
 
 USAGE="$LOGO
 Stemcreator e um criador de stems.
-
 Usage: $0 -i [path]
-
 Supported input file format: ${SUPPORTED_FILES[@]}
 "
 VERSION=2.0.0
@@ -63,8 +61,8 @@ create_tags_json() {
              [[ $title == "lyrics" ]] || [[ $title == "isrc" ]] ||
             [[ $title == "releasetime" ]] || [[ $title == "album" ]] ||
             [[ $title == "comment" ]] || [[ $title == "date" ]] ||
-            [[ $title == "CUEPOINTS" ]] || [[ $title == "BPM" ]] ||
-            [[ $title == "BEATGRID" ]] || [[ $title == "TRAKTOR4" ]] ||
+            [[ $title == "cuepoints" ]] || [[ $title == "bpm" ]] ||
+            [[ $title == "beatgrid" ]] || [[ $title == "traktor4" ]] ||
             [[ $title == "album_artist" ]] || [[ $title == "initialkey" ]] ||
            [[ $title == "genre" ]] || [[ $title == "url" ]]; then
             tags+=("${title}=${value}")
