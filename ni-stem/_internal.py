@@ -170,12 +170,6 @@ class StemCreator:
             tags["\xa9gen"] = self._tags["genre"]
         if ("date" in self._tags) and (len(self._tags["date"]) > 0):
             tags["\xa9day"] = mutagen.mp4.MP4FreeForm(self._tags["date"])                                           
-        if ("beatgrid" in self._tags) and (len(self._tags["beatgrid"]) > 0):
-            tags["----:com.apple.iTunes:BEATGRID"] = mutagen.mp4.MP4FreeForm(self._tags["beatgrid"])
-        if ("cuepoints" in self._tags) and (len(self._tags["cuepoints"]) > 0):
-            tags["----:com.apple.iTunes:CUEPOINTS"] = mutagen.mp4.MP4FreeForm(self._tags["cuepoints"])
-        if ("traktor4" in self._tags) and (len(self._tags["traktor4"]) > 0):
-            tags["----:com.apple.iTunes:TRAKTOR4"] = mutagen.mp4.MP4FreeForm(self._tags["traktor4"])
         if ("releasetime" in self._tags) and (len(self._tags["releasetime"]) > 0):
             tags["----:com.apple.iTunes:RELEASETIME"] = mutagen.mp4.MP4FreeForm(self._tags["releasetime"])
         if ("isrc" in self._tags) and (len(self._tags["isrc"]) > 0):
