@@ -86,7 +86,7 @@ create_tags_json() {
 split_song() {
     echo "Separando faixas..."
 
-    spleeter separate -B tensorflow -i "$INPUT_PATH" -p "/content/teste/base_config.json" -o stems -c m4a -b 320k
+    spleeter separate -B tensorflow -i "$INPUT_PATH" -p "/content/teste/base_config.json" -o stems -c m4a -b 411k
 
     echo "Feito."
 }
