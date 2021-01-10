@@ -513,8 +513,8 @@ class ID3(DictProxy, mutagen.Metadata):
             from errno import ENOENT
             if err.errno != ENOENT:
                 raise
-            f = open(filename, 'ab')  # create, then reopen
-            f = open(filename, 'rb+')
+            f = open(filename, 'ab').close()  # create, then reopen
+            f = open(filename, 'rb+').close()
             f.close()
             # test text mode
         try:
