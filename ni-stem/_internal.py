@@ -76,7 +76,7 @@ class StemCreator:
         # {"name" : "Stem_${TRACK#}", "color" : "#000000"}
 
         if numStems > numMetaEntries:
-            print("missing stem metadata for stems " + str(numMetaEntries) + " - " + str(numStems))
+            print("faltando metadata para stems " + str(numMetaEntries) + " - " + str(numStems))
             numDefaultEntries = len(self._defaultMetadata)
             self._metadata.extend(self._defaultMetadata["stems"][numMetaEntries:min(numStems, numDefaultEntries)])
             self._metadata["stems"].extend([{"name" :"".join(["Stem_", str(i + numDefaultEntries)]), "color" : "#000000"} \
@@ -89,7 +89,7 @@ class StemCreator:
             return trackPath
 
         if fileExtension in _supported_files_conversion:
-            print("\nconverting " + trackPath + " to " + self._format + "...")
+            print("\nconvertendo " + trackPath + " para " + self._format + "...")
             sys.stdout.flush()
 
             newPath = trackName + ".mp4"
@@ -110,8 +110,8 @@ class StemCreator:
             subprocess.check_call(converterArgs)
             return newPath
         else:
-            print("invalid input file format \"" + fileExtension + "\"")
-            print("valid input file formats are " + ", ".join(_supported_files_conversion))
+            print("formato de arquivo invalido \"" + fileExtension + "\"")
+            print("formatos validos sao " + ", ".join(_supported_files_conversion))
             sys.exit()
 
     def save(self, outputFilePath = None):
@@ -130,18 +130,18 @@ class StemCreator:
         executable = "mp4box.exe" if _windows else "/usr/bin/MP4Box"
         mp4box     = os.path.join(_getProgramPath(), folderName, executable)
         
-        print("\n[Done 0/6]\n")
+        print("\n[Feito 0/6]\n")
         sys.stdout.flush()
         
         callArgs = [mp4box]
         callArgs.extend(["-add", self._convertToFormat(self._mixdownTrack, format) + "#ID=Z", outputFilePath])
-        print("\n[Done 1/6]\n")
+        print("\n[Feito 1/6]\n")
         sys.stdout.flush()
         conversionCounter = 1
         for stemTrack in self._stemTracks:
             callArgs.extend(["-add", self._convertToFormat(stemTrack, format) + "#ID=Z:disable"])
             conversionCounter += 1
-            print("\n[Done " + str(conversionCounter) + "/6]\n")
+            print("\n[Feito " + str(conversionCounter) + "/6]\n")
             sys.stdout.flush()
         callArgs.extend(["-udta", "0:type=stem:src=base64," + base64.b64encode(json.dumps(self._metadata))])
         subprocess.check_call(callArgs)
@@ -187,10 +187,10 @@ class StemCreator:
         tags["TAUT"] = "STEM"
         tags.save(outputFilePath)
         
-        print("\n[Done 6/6]\n")
+        print("\n[Feito 6/6]\n")
         sys.stdout.flush()
 
-        print("creating " + outputFilePath + " was successful!")
+        print("A criação de " + outputFilePath + " foi um sucesso!")
 
 
 class StemMetadataViewer:
