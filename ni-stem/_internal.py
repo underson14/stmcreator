@@ -190,7 +190,7 @@ class StemCreator:
         print("\n[Feito 6/6]\n")
         sys.stdout.flush()
 
-        print("A criação de " + outputFilePath + " foi um sucesso!")
+        print("A criacao de " + outputFilePath + " foi um sucesso!")
 
 
 class StemMetadataViewer:
