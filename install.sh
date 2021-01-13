@@ -13,7 +13,7 @@ cd /content/stmcreator
 unzip "/content/stmcreator/ni-stem/gpac.zip"
 mv "/content/stmcreator/gpac/" "/content/stmcreator/ni-stem/"
 chmod -R 755 "/content/stmcreator/ni-stem/"
-chmod -R 755 "/content/tstmcreator/ni-stem/gpac/"
+chmod -R 755 "/content/stmcreator/ni-stem/gpac"
 chmod -R 755 "/content/stmcreator/creator"
 rm -rf "/content/stmcreator/__MACOSX"
 rm -rf "/content/stmcreator/ni-stem/gpac.zip"
