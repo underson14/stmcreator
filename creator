@@ -61,6 +61,7 @@ create_tags_json() {
              [[ $title == "lyrics" ]] || [[ $title == "isrc" ]] ||
             [[ $title == "releasetime" ]] || [[ $title == "album" ]] ||
             [[ $title == "comment" ]] || [[ $title == "date" ]] ||
+            [[ $title == "TSRC" ]] || [[ $title == "copyright" ]] ||
             [[ $title == "album_artist" ]] || [[ $title == "initialkey" ]] ||
            [[ $title == "genre" ]] || [[ $title == "url" ]]; then
             tags+=("${title}=${value}")
