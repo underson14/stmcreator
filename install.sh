@@ -9,6 +9,7 @@ pip3 uninstall tensorflow==2.4.0 -y
 pip3 install tensorflow==2.3.0
 pip3 install spleeter-gpu
 apt install -y gpac 
+cd stmcreator
 unzip "stmcreator/ni-stem/gpac.zip"
 mv "stmcreator/gpac/" "stmcreator/ni-stem/"
 chmod -R 755 "stmcreator/ni-stem/"
