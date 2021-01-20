@@ -127,7 +127,7 @@ class StemCreator:
         _removeFile(outputFilePath)
 
         folderName = "GPAC_win"   if _windows else "/content/stmcreator/ni-stem/gpac"
-        executable = "mp4box.exe" if _windows else "/content/stmcreator/ni-stem/gpac/bin/MP4Box"
+        executable = "mp4box.exe" if _windows else "/usr/bin/MP4Box"
         mp4box     = os.path.join(_getProgramPath(), folderName, executable)
         
         print("\n[Feito 0/6]\n")
@@ -200,7 +200,7 @@ class StemMetadataViewer:
 
         if stemFile:
             folderName = "GPAC_win"   if _windows else "/content/stmcreator/ni-stem/gpac"
-            executable = "mp4box.exe" if _windows else "/content/stmcreator/ni-stem/gpac/bin/MP4Box"
+            executable = "mp4box.exe" if _windows else "/usr/bin/MP4Box"
             mp4box     = os.path.join(_getProgramPath(), folderName, executable)
 
             callArgs = [mp4box]
