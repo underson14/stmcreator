@@ -85,7 +85,7 @@ create_tags_json() {
 split_song() {
     echo "Separando faixas..."
 
-    spleeter separate -B tensorflow -i "$INPUT_PATH" -p "/content/stmcreator/base_config.json" -o stems -c m4a -b 411k
+    spleeter separate -B tensorflow -i "$INPUT_PATH" -p "stmcreator/base_config.json" -o stems -c m4a -b 411k
 
     echo "Feito."
 }
@@ -93,7 +93,7 @@ split_song() {
 create_stem() {
     echo "Criando stem..."
 
-    "/content/stmcreator/ni-stem/ni-stem" create -s "stems/$FILE_NAME/1.melodia.m4a" "stems/$FILE_NAME/2.vocais.m4a" "stems/$FILE_NAME/3.baixo.m4a" "stems/$FILE_NAME/4.bateria.m4a" -x "stems/$FILE_NAME/$FILE_NAME.wav" -t "stems/$FILE_NAME/tags.json" -m "/content/stmcreator/metadata.json" 
+    "stmcreator/ni-stem/ni-stem" create -s "stems/$FILE_NAME/1.melodia.m4a" "stems/$FILE_NAME/2.vocais.m4a" "stems/$FILE_NAME/3.baixo.m4a" "stems/$FILE_NAME/4.bateria.m4a" -x "stems/$FILE_NAME/$FILE_NAME.wav" -t "stems/$FILE_NAME/tags.json" -m "stmcreator/metadata.json" 
     
     echo "Feito."
 }
@@ -135,7 +135,7 @@ setup() {
         fi
     done
 
-    if [[ $(/content/stmcreator/ni-stem/ni-stem -h) == "" ]]; then
+    if [[ $(stmcreator/ni-stem/ni-stem -h) == "" ]]; then
         echo "Instale ni-stem antes de rodar o Stemcreator."
         exit 2
     fi
