@@ -1,0 +1,226 @@
+#!/bin/bash
+
+SUPPORTED_FILES=('.wav' '.mp3' '.wave' '.aif' '.aiff' '.flac' '.m4a' '.mp4')
+
+USAGE="$LOGO
+Stemcreator e um criador de stems.
+Usage: $0 -i [path]
+Supported input file format: ${SUPPORTED_FILES[@]}
+"
+VERSION=2.0.0
+
+INPUT_PATH=
+BASE_PATH=
+FILE_NAME=
+FILE_EXTENSION=
+
+get_cover() {
+    echo "Extraindo capa..."
+
+    ffmpeg -i "$INPUT_PATH" -an -vcodec copy "stems/$FILE_NAME/cover.jpg" -y
+
+    echo "Feito."
+}
+
+get_metadata() {
+    echo "Extraindo metadata..."
+
+    ffmpeg -i "$INPUT_PATH" -f ffmetadata "stems/$FILE_NAME/metadata.txt" -y
+
+    echo "Feito."
+}
+
+convert_to_wav() {
+    echo "Convertendo para wav..."
+
+    ffmpeg -i "$INPUT_PATH" -map_metadata 0:s:0 "stems/$FILE_NAME/$FILE_NAME.wav" -y
+
+    echo "Feito."
+}
+
+create_tags_json() {
+    echo "Criando tags.json..."
+
+    cd "stems/$FILE_NAME"
+
+    local path=$( cd "$(dirname "$FILE_NAME")" >/dev/null 2>&1 ; pwd -P )
+
+    echo $path
+
+    local tags=()
+
+    # Add metadata, e.g. `artist` `genre`
+    while IFS=$'\n' read tag; do
+        title=${tag%%=*}
+        title=$(echo "$title" | awk '{ print tolower($0) }')
+        value=${tag##*=}
+        if [[ $title == "title" ]]; then
+            # Add meta `title` as `track` for `ni-stem`
+            tags+=("track=${value}")
+        elif [[ $title == "artist" ]] || [[ $title == "label" ]] ||
+             [[ $title == "lyrics" ]] || [[ $title == "isrc" ]] ||
+            [[ $title == "releasetime" ]] || [[ $title == "album" ]] ||
+            [[ $title == "comment" ]] || [[ $title == "date" ]] ||
+            [[ $title == "tsrc" ]] || [[ $title == "copyright" ]] ||
+            [[ $title == "album_artist" ]] || [[ $title == "initialkey" ]] ||
+           [[ $title == "genre" ]] || [[ $title == "url" ]]; then
+            tags+=("${title}=${value}")
+        fi
+    done < metadata.txt
+
+    # Add `cover`
+    if [[ -e "cover.jpg" ]]; then
+        tags+=("cover=file://${path}/cover.jpg")
+    fi
+
+    echo ${tags[@]}
+
+    jo -p -- "${tags[@]:-}" > tags.json
+
+    cd ../../
+
+    echo "Feito."
+}
+
+split_song() {
+    echo "Separando faixas..."
+
+    spleeter separate -B tensorflow -i "$INPUT_PATH" -p "/stmcreator/base_config.json" -o stems -c m4a -b 411k
+
+    echo "Feito."
+}
+
+create_stem() {
+    echo "Criando stem..."
+
+    "/stmcreator/ni-stem/ni-stem" create -s "stems/$FILE_NAME/1.melodia.m4a" "stems/$FILE_NAME/2.vocais.m4a" "stems/$FILE_NAME/3.baixo.m4a" "stems/$FILE_NAME/4.bateria.m4a" -x "stems/$FILE_NAME/$FILE_NAME.wav" -t "stems/$FILE_NAME/tags.json" -m "/stmcreator/metadata.json" 
+    
+    echo "Feito."
+}
+
+clean_dir() {
+    echo "Limpando..."
+
+    cd "stems/$FILE_NAME"
+    if [[ -f "$FILE_NAME.stem.mp4" ]]; then
+        mv "$FILE_NAME.stem.mp4" ..
+    else
+        echo "Erro."
+        exit 2
+    fi
+    cd ..
+    rm -rf "$FILE_NAME"
+
+    echo "Feito."
+}
+
+setup_file() {
+    FILE_EXTENSION=$1
+    FILE_NAME=${BASE_PATH%"$FILE_EXTENSION"}
+
+    if [[ -d "stems/$FILE_NAME" ]]; then
+        echo "Pasta ja criada."
+    else
+        mkdir "stems/$FILE_NAME"
+        echo "Pasta criada."
+    fi
+}
+
+setup() {
+    packages=('ffmpeg' 'spleeter' 'jo')
+    for package in "${packages[@]}"; do
+        if [[ $(which $package) == "" ]]; then
+            echo "Instale $package antes de rodar o Stemcreator."
+            exit 2
+        fi
+    done
+
+    if [[ $(/stmcreator/ni-stem/ni-stem -h) == "" ]]; then
+        echo "Instale ni-stem antes de rodar o Stemcreator."
+        exit 2
+    fi
+
+    if [[ -d stems ]]; then
+        echo "Pasta de Stems ja criada."
+    else
+        mkdir stems
+        echo "Pasta de Stems criada."
+    fi
+
+    BASE_PATH=${INPUT_PATH##*/}
+
+    case "$INPUT_PATH" in
+        *.wave)
+            setup_file .wave
+            cp "$INPUT_PATH" "stems/$FILE_NAME/$FILE_NAME.wav"
+            ;;
+        *.wav)
+            setup_file .wav
+            cp "$INPUT_PATH" "stems/$FILE_NAME/$FILE_NAME.wav"
+            ;;
+        *.aiff)
+            setup_file .aiff
+            convert_to_wav
+            ;;
+        *.aif)
+            setup_file .aif
+            convert_to_wav
+            ;;
+        *.flac)
+            setup_file .flac
+            convert_to_wav
+            ;;
+        *.mp3)
+            setup_file .mp3
+            convert_to_wav
+            ;;   
+        *.m4a)
+            setup_file .m4a
+            convert_to_wav
+            ;; 
+        *.mp4)
+            setup_file .mp4
+            convert_to_wav
+            ;; 
+        *)
+            echo "Formato invalido. O arquivo deve ser do tipo:" ${SUPPORTED_FILES[@]}
+            exit 1
+            ;;
+    esac
+
+    echo "Pronto!"
+}
+
+run() {
+    echo "Criando 1 Stem para $FILE_NAME..."
+
+    get_cover
+    get_metadata
+    create_tags_json
+    split_song
+    create_stem
+    clean_dir
+
+    echo "Successo!"
+}
+
+while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
+    -V | --version)
+        echo $VERSION
+        exit 0
+        ;;
+    -i | --input)
+        shift; INPUT_PATH=$1
+        ;;
+    -h | --help)
+        echo "$USAGE"
+        exit 0
+        ;;
+    * )
+        echo "$USAGE"
+        exit 1
+        ;;
+esac; shift; done
+if [[ "$1" == '--' ]]; then shift; fi
+
+setup && run
