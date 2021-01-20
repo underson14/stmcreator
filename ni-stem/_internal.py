@@ -127,7 +127,7 @@ class StemCreator:
         _removeFile(outputFilePath)
 
         folderName = "GPAC_win"   if _windows else "/content/stmcreator/ni-stem/gpac"
-        executable = "mp4box.exe" if _windows else "/usr/bin/MP4Box"
+        executable = "mp4box.exe" if _windows else "/content/stmcreator/ni-stem/gpac/bin/MP4Box"
         mp4box     = os.path.join(_getProgramPath(), folderName, executable)
         
         print("\n[Feito 0/6]\n")
@@ -169,7 +169,7 @@ class StemCreator:
         if ("genre" in self._tags) and (len(self._tags["genre"]) > 0):
             tags["\xa9gen"] = self._tags["genre"]
         if ("date" in self._tags) and (len(self._tags["date"]) > 0):
-            tags["\xa9day"] = mutagen.mp4.MP4FreeForm(self._tags["date"])                                           
+            tags["\xa9day"] = self._tags["date"]                                          
         if ("releasetime" in self._tags) and (len(self._tags["releasetime"]) > 0):
             tags["----:com.apple.iTunes:RELEASETIME"] = mutagen.mp4.MP4FreeForm(self._tags["releasetime"])
         if ("isrc" in self._tags) and (len(self._tags["isrc"]) > 0):
@@ -200,7 +200,7 @@ class StemMetadataViewer:
 
         if stemFile:
             folderName = "GPAC_win"   if _windows else "/content/stmcreator/ni-stem/gpac"
-            executable = "mp4box.exe" if _windows else "/usr/bin/MP4Box"
+            executable = "mp4box.exe" if _windows else "/content/stmcreator/ni-stem/gpac/bin/MP4Box"
             mp4box     = os.path.join(_getProgramPath(), folderName, executable)
 
             callArgs = [mp4box]
