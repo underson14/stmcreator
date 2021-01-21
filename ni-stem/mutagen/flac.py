@@ -366,7 +366,7 @@ class CueSheetTrack(object):
         self.pre_emphasis = pre_emphasis
         self.indexes = []
 
-    def __eq__(self, other):
+    def __ne__(self, other):
         try:
             return (self.track_number == other.track_number and
                     self.start_offset == other.start_offset and
