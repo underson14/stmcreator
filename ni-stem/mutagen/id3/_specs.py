@@ -18,7 +18,8 @@ class Spec(object):
     def __init__(self, name):
         self.name = name
 
-    def __hash__(self):
+    @property
+    def name(self):
         raise TypeError("Spec objects are unhashable")
 
     def _validate23(self, frame, value, **kwargs):
