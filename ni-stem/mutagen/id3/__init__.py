@@ -508,13 +508,13 @@ class ID3(DictProxy, mutagen.Metadata):
         if filename is None:
             filename = self.filename
         try:
-            f = open(filename, 'rb+')
+            f = open(filename, 'rb+').close()
         except IOError as err:
             from errno import ENOENT
             if err.errno != ENOENT:
                 raise
-            f = open(filename, 'ab')  # create, then reopen
-            f = open(filename, 'rb+')
+            f = open(filename, 'ab').close() # create, then reopen
+            f = open(filename, 'rb+').close()
         try:
             idata = f.read(10)
 
