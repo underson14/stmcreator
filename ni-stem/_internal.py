@@ -79,7 +79,7 @@ class StemCreator:
             print("faltando metadata para stems " + str(numMetaEntries) + " - " + str(numStems))
             numDefaultEntries = len(self._defaultMetadata)
             self._metadata.extend(self._defaultMetadata["stems"][numMetaEntries:min(numStems, numDefaultEntries)])
-            self._metadata["stems"].extend([{"name" :"".join(["Stem_", str(i + numDefaultEntries)]), "color" : "#000000"} \
+            self._metadata[0]"stems".extend([{"name" :"".join(["Stem_", str(i + numDefaultEntries)]), "color" : "#000000"} \
                 for i in range(numStems - numDefaultEntries)])
 
     def _convertToFormat(self, trackPath, format):
