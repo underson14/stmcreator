@@ -56,7 +56,7 @@ class distcheck(sdist):
         assert self.get_archive_files()
 
         # make sure MANIFEST.in includes all tracked files
-        if subprocess.call(["hg", "status"],
+        if subprocess.Popen(["hg", "status"],
                            stdout=subprocess.PIPE,
                            stderr=subprocess.PIPE) == 0:
             # contains the packaged files after run() is finished
