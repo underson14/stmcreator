@@ -199,7 +199,8 @@ class Frame(object):
         frame._readData(data)
         return frame
 
-    def __hash__(self):
+    @property
+    def name(self):
         raise TypeError("Frame objects are unhashable")
 
 
