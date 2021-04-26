@@ -1,4 +1,3 @@
-python -m pip install --upgrade pip
 pip3 uninstall folium -y
 pip3 install folium==0.2.1
 pip3 uninstall imgaug -y
@@ -15,4 +14,5 @@ chmod -R 755 "/content/stmcreator/creator"
 rm -rf "/content/stmcreator/__MACOSX"
 rm -rf "/content/stmcreator/ni-stem/gpac.zip"
 apt install -y jo
+apt autoremove
 
