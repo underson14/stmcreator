@@ -15,8 +15,7 @@ unzip "/content/stmcreator/ni-stem/gpac.zip"
 mv "/content/stmcreator/gpac/" "/content/stmcreator/ni-stem/"
 chmod -R 755 "/content/stmcreator/ni-stem/"
 chmod -R 755 "/content/stmcreator/ni-stem/gpac"
-chmod -R 755 "/content/stmcreator/creator"
+chmod -R 755 "/content/stmcreator/creator-spleeter-gpu"
 rm -rf "/content/stmcreator/__MACOSX"
 rm -rf "/content/stmcreator/ni-stem/gpac.zip"
 apt install -y jo
-apt install -y mediainfo
