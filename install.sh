@@ -14,5 +14,6 @@ chmod -R 755 "/content/stmcreator/creator"
 rm -rf "/content/stmcreator/__MACOSX"
 rm -rf "/content/stmcreator/ni-stem/gpac.zip"
 apt install -y jo
+apt install zip unzip
 apt autoremove
 
