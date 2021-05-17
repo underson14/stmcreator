@@ -47,7 +47,7 @@ class StemCreator:
     def __init__(self, mixdownTrack, stemTracks, fileFormat, metadataFile = None, tags = None):
         self._mixdownTrack = mixdownTrack
         self._stemTracks   = stemTracks
-        self._format       = fileFormat if fileFormat else "libvorbis"
+        self._format       = fileFormat if fileFormat else "libfdk_aac"
         self._tags         = json.load(open(tags)) if tags else {}
 
         # Mutagen complains gravely if we do not explicitly convert the tag values to a
@@ -100,8 +100,8 @@ class StemCreator:
 
             
             converterArgs.extend(["-i"  , trackPath])
-            if self._format == "libvorbis":
-                converterArgs.extend(["-q:a", "10"])
+            if self._format == "libfdk_aac":
+                converterArgs.extend(["-b:a", "448k"])
             else:
                 converterArgs.extend(["-c:a", self._format])
            
