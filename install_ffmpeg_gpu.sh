@@ -16,4 +16,5 @@ rm -rf "/content/stmcreator/__MACOSX"
 rm -rf "/content/stmcreator/ni-stem/gpac.zip"
 apt install -y jo
 apt install zip unzip
+cp -f "/usr/local/lib/python3.7/dist-packages/spleeter/audio/ffmpeg.py" "/content/stmcreator/ni-stem/ffmpeg.py"
 apt autoremove
