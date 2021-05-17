@@ -101,7 +101,7 @@ class StemCreator:
             
             converterArgs.extend(["-i"  , trackPath])
             if self._format == "libfdk_aac":
-                converterArgs.extend(["-b:a", "448k"])
+                converterArgs.extend(["-b:a", "416k"])
             else:
                 converterArgs.extend(["-c:a", self._format])
            
