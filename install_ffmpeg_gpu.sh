@@ -2,7 +2,7 @@ pip3 uninstall folium -y
 pip3 install folium==0.2.1
 pip3 uninstall imgaug -y
 pip3 install imgaug==0.2.5
-git clone https://github.com/rokibulislaam/colab-ffmpeg-cuda.git
+git clone https://github.com/underson14/colab-ffmpeg-cuda.git
 cp -r ./colab-ffmpeg-cuda/bin/. /usr/bin/
 pip3 install spleeter
 apt install -y gpac 
