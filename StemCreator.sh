@@ -14,8 +14,8 @@ zip -r "stem.zip" "stems"
 
 rm -rf "./pretrained_models"
 
-makedir "Flac/"
+mkdir Flac
 
 for f in *.flac; do
-   time mv "$f" "Flac/"
+   time mv "$f" "Flac"
 done
