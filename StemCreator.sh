@@ -1,3 +1,5 @@
+#/bin/bash
+
 rename 's/:/,/g' *
 rename 's/;/, /g' *
 rename 's/"//g' *
@@ -12,12 +14,14 @@ done
 
 data=`/bin/date +%d-%m-%Y`
 
-zip -r "stem - ${data}.zip" "stems"
+zip -r "stems - ${data}.zip" "stems"
 
 rm -rf "./pretrained_models"
 
-mkdir Flac - ${data}
+mv "./stems" "./stems - ${data}"
+
+mkdir "Flac - ${data}"
 
 for f in *.flac; do
-   time mv "$f" "Flac-${data}"
+   time mv "$f" "Flac - ${data}"
 done
