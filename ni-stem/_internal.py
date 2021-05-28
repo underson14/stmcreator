@@ -101,7 +101,7 @@ class StemCreator:
             
             converterArgs.extend(["-i"  , trackPath])
             if self._format == "libfdk_aac":
-                converterArgs.extend(["-b:a", "416k"])
+                converterArgs.extend(["-b:a", "328k"])
             else:
                 converterArgs.extend(["-c:a", self._format])
            
@@ -160,12 +160,16 @@ class StemCreator:
             tags["aART"] = self._tags["album_artist"]
         if ("initialkey" in self._tags) and (len(self._tags["initialkey"]) > 0):
             tags["----:com.apple.iTunes:INITIALKEY"] = mutagen.mp4.MP4FreeForm(self._tags["initialkey"])
+        if ("cprt" in self._tags) and (len(self._tags["cprt"]) > 0):
+            tags["----:com.apple.iTunes:CATALOGNUMBER"] = mutagen.mp4.MP4FreeForm(self._tags["cprt"])    
+        if ("mood" in self._tags) and (len(self._tags["mood"]) > 0):
+            tags["----:com.apple.iTunes:REMIXER"] = mutagen.mp4.MP4FreeForm(self._tags["mood"])        
         if ("lyrics" in self._tags) and (len(self._tags["lyrics"]) > 0):
             tags["\xA9lyr"] = mutagen.mp4.MP4FreeForm(self._tags["lyrics"])
         if ("url" in self._tags) and (len(self._tags["url"]) > 0):
             tags["\xA9url"] = mutagen.mp4.MP4FreeForm(self._tags["url"])      
         if ("label" in self._tags) and (len(self._tags["label"]) > 0):
-            tags["----:com.apple.iTunes:LABEL"] = mutagen.mp4.MP4FreeForm(self._tags["label"])
+            tags["----:com.apple.iTunes:PUBLISHER"] = mutagen.mp4.MP4FreeForm(self._tags["label"])
         if ("genre" in self._tags) and (len(self._tags["genre"]) > 0):
             tags["\xa9gen"] = self._tags["genre"]
         if ("date" in self._tags) and (len(self._tags["date"]) > 0):
