@@ -161,9 +161,13 @@ class StemCreator:
         if ("initialkey" in self._tags) and (len(self._tags["initialkey"]) > 0):
             tags["----:com.apple.iTunes:INITIALKEY"] = mutagen.mp4.MP4FreeForm(self._tags["initialkey"])
         if ("copyright" in self._tags) and (len(self._tags["copyright"]) > 0):
+            tags["cprt"] = mutagen.mp4.MP4FreeForm(self._tags["copyright"]) 
+        if ("copyright" in self._tags) and (len(self._tags["copyright"]) > 0):
             tags["----:com.apple.iTunes:CATALOGNUMBER"] = mutagen.mp4.MP4FreeForm(self._tags["copyright"])    
         if ("mood" in self._tags) and (len(self._tags["mood"]) > 0):
-            tags["----:com.apple.iTunes:REMIXER"] = mutagen.mp4.MP4FreeForm(self._tags["mood"])        
+            tags["----:com.apple.iTunes:REMIXER"] = mutagen.mp4.MP4FreeForm(self._tags["mood"])
+        if ("mood" in self._tags) and (len(self._tags["mood"]) > 0):
+            tags["----:com.apple.iTunes:MOOD"] = mutagen.mp4.MP4FreeForm(self._tags["mood"])        
         if ("lyrics" in self._tags) and (len(self._tags["lyrics"]) > 0):
             tags["\xA9lyr"] = mutagen.mp4.MP4FreeForm(self._tags["lyrics"])
         if ("url" in self._tags) and (len(self._tags["url"]) > 0):
