@@ -7,7 +7,7 @@ Stemcreator e um criador de stems.
 Usage: $0 -i [path]
 Supported input file format: ${SUPPORTED_FILES[@]}
 "
-VERSION=2.0.1
+VERSION=2.0.5
 
 INPUT_PATH=
 BASE_PATH=
@@ -61,7 +61,7 @@ create_tags_json() {
              [[ $title == "lyrics" ]] || [[ $title == "isrc" ]] ||
             [[ $title == "releasetime" ]] || [[ $title == "album" ]] ||
             [[ $title == "comment" ]] || [[ $title == "album_artist" ]] ||
-            [[ $title == "tsrc" ]] || [[ $title == "initialkey" ]] ||
+            [[ $title == "tsrc" ]] || [[ $title == "key" ]] ||
             [[ $title == "mood" ]] || [[ $title == "copyright" ]] ||
            [[ $title == "genre" ]] || [[ $title == "url" ]]; then
             tags+=("${title}=${value}")
