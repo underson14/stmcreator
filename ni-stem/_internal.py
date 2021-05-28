@@ -158,8 +158,8 @@ class StemCreator:
             tags["\xa9alb"] = self._tags["album"]
         if ("album_artist" in self._tags) and (len(self._tags["album_artist"]) > 0):
             tags["aART"] = self._tags["album_artist"]
-        if ("initialkey" in self._tags) and (len(self._tags["initialkey"]) > 0):
-            tags["----:com.apple.iTunes:INITIALKEY"] = mutagen.mp4.MP4FreeForm(self._tags["initialkey"])
+        if ("key" in self._tags) and (len(self._tags["key"]) > 0):
+            tags["----:com.apple.iTunes:INITIALKEY"] = mutagen.mp4.MP4FreeForm(self._tags["key"])
         if ("copyright" in self._tags) and (len(self._tags["copyright"]) > 0):
             tags["cprt"] = mutagen.mp4.MP4FreeForm(self._tags["copyright"]) 
         if ("copyright" in self._tags) and (len(self._tags["copyright"]) > 0):
