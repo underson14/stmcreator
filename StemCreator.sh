@@ -23,5 +23,5 @@ mv "./stems" "./stems - ${data}"
 mkdir "Flac - ${data}"
 
 for f in *.flac; do
-   time mv "$f" "Flac - ${data}"
+   mv "$f" "Flac - ${data}"
 done
