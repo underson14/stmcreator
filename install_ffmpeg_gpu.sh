@@ -19,4 +19,6 @@ apt install -y sox
 apt install -y zip unzip
 rm -rf "/usr/local/lib/python3.7/dist-packages/spleeter/audio/ffmpeg.py"
 mv "/content/stmcreator/ni-stem/ffmpeg.py" "/usr/local/lib/python3.7/dist-packages/spleeter/audio/"
+pip3 uninstall tensorflow -y
+pip3 installtensorflow==2.3.0
 apt autoremove
