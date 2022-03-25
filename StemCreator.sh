@@ -12,7 +12,7 @@ for f in *.*; do
    time "/content/stmcreator/creator" -i "$f"
 done
 
-data='/bin/date +%d-%m-%Y'
+data=`/bin/date +%d-%m-%Y`
 
 zip -r "stems - ${data}.zip" "stems"
 
