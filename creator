@@ -89,16 +89,16 @@ split_song() {
     dur=$(soxi -D "$INPUT_PATH")
     int=${dur%.*}
     echo $int "segundos"
-    lmt1=330
+    lmt1=300
     lmt2=390
 
             if [ $int -lt $lmt1 ]; 
             then
                   echo "tamanho normal"
                   spleeter separate "$INPUT_PATH" -B tensorflow -p "/content/stmcreator/base_config.json" -o stems -c m4a -b 328k
-            elif [ $int -ge $lmt1 ] && [ $int -le $lmt2 ];
+            elif [ $int -ge $lmt1 ] && [ $int -lt $lmt2 ];
             then
-                  echo "maior que 5 minutos e 30 e menor que 6 minutos e 30 segundos"
+                  echo "maior que 5 minutos e menor que 6 minutos e 30 segundos"
                   spleeter separate "$INPUT_PATH" -B tensorflow -p "/content/stmcreator/base_config1.json" -o stems -c m4a -b 328k
             else
                   echo "maior 6 minutos e 30 segundos"
