@@ -59,10 +59,10 @@ create_tags_json() {
             tags+=("track=${value}")
         elif [[ $title == "artist" ]] || [[ $title == "label" ]] ||
              [[ $title == "lyrics" ]] || [[ $title == "isrc" ]] ||
-            [[ $title == "releasetime" ]] || [[ $title == "album" ]] ||
-            [[ $title == "comment" ]] || [[ $title == "album_artist" ]] ||
-            [[ $title == "tsrc" ]] || [[ $title == "mood" ]] || [[ $title == "copyright" ]] ||
-           [[ $title == "genre" ]] || [[ $title == "url" ]]; then
+             [[ $title == "releasetime" ]] || [[ $title == "album" ]] ||
+             [[ $title == "album_artist" ]] ||[[ $title == "tsrc" ]] || 
+             [[ $title == "mood" ]] || [[ $title == "copyright" ]] ||
+             [[ $title == "genre" ]] || [[ $title == "url" ]]; then
             tags+=("${title}=${value}")
         fi
     done < metadata.txt
