@@ -12,15 +12,15 @@ for f in *.*; do
    time "/content/stmcreator/creator" -i "$f"
 done
 
-data=`/bin/date +%d/%m/%Y %H:%M:%S`
+data=`/bin/date +"%d-%m-%Y %H:%M:%S"`
 
-zip -r "stems - ${data}.zip" "stems"
+zip -r "stems ${data}.zip" "stems"
 
 rm -rf "./pretrained_models"
 
-mv "./stems" "./stems - ${data}"
+mv "./stems" "./stems ${data}"
 
 for f in *.*; do
-      mkdir "${f##*.} - ${data}"
-      mv "$f" "${f##*.} - ${data}"
+      mkdir "${f##*.} ${data}"
+      mv "$f" "${f##*.} ${data}"
 done
