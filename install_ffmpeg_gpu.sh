@@ -25,4 +25,16 @@ rm -rf "/usr/local/lib/python3.7/dist-packages/spleeter/audio/ffmpeg.py"
 mv "/content/stmcreator/ni-stem/ffmpeg.py" "/usr/local/lib/python3.7/dist-packages/spleeter/audio/"
 pip3 uninstall tensorflow -y
 pip3 install tensorflow==2.3.0
+
+pip3 uninstall numpy -y
+pip3 install numpy==1.19.0
+
+pip3 uninstall tables -y
+pip3 install tables==3.7.0
+
+pip3 uninstall jaxlib -y
+pip3 install jaxlib==0.3.2+cuda11.cudnn805
+
+pip3 uninstall jax -y
+pip3 install jax==0.3.4
 apt autoremove
