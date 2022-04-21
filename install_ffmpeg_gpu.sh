@@ -1,3 +1,4 @@
+#/bin/bash
 pip3 uninstall folium -y
 pip3 install folium==0.2.1
 pip3 uninstall imgaug -y
