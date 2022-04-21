@@ -20,8 +20,8 @@ rm -rf "./pretrained_models"
 
 mv "./stems" "./stems - ${data}"
 
-mkdir "Flac - ${data}"
+mkdir "M4a - ${data}"
 
-for f in *.flac; do
-   mv "$f" "Flac - ${data}"
+for f in *.m4a; do
+   mv "$f" "M4A - ${data}"
 done
