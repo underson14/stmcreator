@@ -20,7 +20,19 @@ rm -rf "./pretrained_models"
 
 mv "./stems" "./stems ${data}"
 
+mkdir "Arquivos Stems"
+
+mv "./stems ${data}" "Arquivos Stems"
+
+for f in *.zip; do
+      mkdir "Arquivos ZIP"
+      mv "$f" "Arquivos ZIP"
+done
+
+
 for f in *.*; do
+      mkdir "Arquivos ${f##*.}"
       mkdir "${f##*.} ${data}"
       mv "$f" "${f##*.} ${data}"
+      mv "${f##*.} ${data}" "Arquivos ${f##*.}"
 done
