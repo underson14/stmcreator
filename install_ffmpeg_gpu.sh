@@ -1,4 +1,7 @@
 #/bin/bash
+rm /etc/localtime
+ln -s /usr/share/zoneinfo//America/Sao_Paulo /etc/localtime
+
 pip3 uninstall folium -y
 pip3 install folium==0.2.1
 pip3 uninstall imgaug -y
