@@ -37,4 +37,11 @@ pip3 install jaxlib==0.3.2+cuda11.cudnn805
 
 pip3 uninstall jax -y
 pip3 install jax==0.3.4
+
+sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+sudo chmod a+rx /usr/local/bin/youtube-dl
+apt install -y atomicparsley
+apt install aria2 -y
+chmod +x "/content/stmcreator/downvideo.sh"
+chmod +x "/content/stmcreator/downmp3.sh"
 apt autoremove
