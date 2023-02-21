@@ -29,7 +29,7 @@ from mutagen._constants import GENRES
 from mutagen._util import cdata, insert_bytes, DictProxy, MutagenError, \
     hashable, enum
 from mutagen._compat import reraise, PY2, string_types, text_type, chr_, \
-    iteritems, PY3
+    items, PY3
 
 
 class error(IOError, MutagenError):
