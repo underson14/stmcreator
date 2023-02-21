@@ -124,7 +124,7 @@ class DictMixin(object):
         return list(zip(self.keys(), self.values()))
 
     if PY2:
-        iteritems = lambda s: iter(s.items())
+        items = lambda s: iter(s.items())
 
     def clear(self):
         for key in list(self.keys()):
@@ -410,7 +410,7 @@ def dict_match(d, key, default=None):
     if key in d and "[" not in key:
         return d[key]
     else:
-        for pattern, value in iteritems(d):
+        for pattern, value in items(d):
             if fnmatchcase(key, pattern):
                 return value
     return default
