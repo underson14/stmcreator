@@ -4,7 +4,7 @@ import base64
 import mutagen
 import mutagen.mp4
 import mutagen.id3
-import urllib2 as urllib
+import urllib3 as urllib
 import os
 import platform
 import subprocess
