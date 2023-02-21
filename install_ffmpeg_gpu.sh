@@ -9,7 +9,7 @@ pip3 install spleeter
 apt install -y gpac 
 cd /content/stmcreator
 unzip "/content/stmcreator/ni-stem/gpac.zip"
-mv "/content/stmcreator/gpac/" "/content/stmcreator/ni-stem/"
+mv "/content/stmcreator/gpac" "/content/stmcreator/ni-stem/"
 chmod -R 755 "/content/stmcreator/ni-stem/"
 chmod -R 755 "/content/stmcreator/ni-stem/gpac"
 chmod -R 755 "/content/stmcreator/creator"
