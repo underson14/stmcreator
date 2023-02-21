@@ -27,7 +27,7 @@ if PY2:
     def endswith(text, end):
         return text.endswith(end)
 
-    iteritems = lambda d: d.iteritems()
+    items = lambda d: d.items()
     itervalues = lambda d: d.itervalues()
     iterkeys = lambda d: d.iterkeys()
 
@@ -69,7 +69,7 @@ elif PY3:
                 end = end.encode("ascii")
         return text.endswith(end)
 
-    iteritems = lambda d: iter(d.items())
+    items = lambda d: iter(d.items())
     itervalues = lambda d: iter(d.values())
     iterkeys = lambda d: iter(d.keys())
 
