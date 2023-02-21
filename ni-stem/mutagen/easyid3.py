@@ -13,7 +13,7 @@ more like Vorbis or APEv2 tags.
 
 import mutagen.id3
 
-from ._compat import iteritems, text_type, PY2
+from ._compat import items, text_type, PY2
 from mutagen import Metadata
 from mutagen._util import DictMixin, dict_match
 from mutagen.id3 import ID3, error, delete, ID3FileType
@@ -440,7 +440,7 @@ def peakgain_list(id3, key):
         keys.append("replaygain_%s_peak" % frame.desc)
     return keys
 
-for frameid, key in iteritems({
+for frameid, key in items({
     "TALB": "album",
     "TBPM": "bpm",
     "TCMP": "compilation",  # iTunes extension
