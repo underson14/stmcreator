@@ -513,7 +513,7 @@ class MP4Tags(DictProxy, Metadata):
             except (TypeError, ValueError) as s:
                 reraise(MP4MetadataValueError, s, sys.exc_info()[2])
 
-        for atom_name, failed in iteritems(self._failed_atoms):
+        for atom_name, failed in items(self._failed_atoms):
             # don't write atoms back if we have added a new one with
             # the same name, this excludes freeform which can have
             # multiple atoms with the same key (most parsers seem to be able
@@ -914,7 +914,7 @@ class MP4Tags(DictProxy, Metadata):
 
     def pprint(self):
         values = []
-        for key, value in iteritems(self):
+        for key, value in items(self):
             if not isinstance(key, text_type):
                 key = key.decode("latin-1")
             if key == "covr":
