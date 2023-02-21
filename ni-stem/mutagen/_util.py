@@ -15,7 +15,7 @@ import codecs
 
 from fnmatch import fnmatchcase
 
-from ._compat import chr_, text_type, PY2, iteritems, iterbytes, integer_types
+from ._compat import chr_, text_type, PY2, items, iterbytes, integer_types
 
 
 class MutagenError(Exception):
@@ -62,7 +62,7 @@ def enum(cls):
     new_type.__module__ = cls.__module__
 
     map_ = {}
-    for key, value in iteritems(d):
+    for key, value in items(d):
         if key.upper() == key and isinstance(value, integer_types):
             value_instance = new_type(value)
             setattr(new_type, key, value_instance)
