@@ -4,7 +4,7 @@ import base64
 import mutagen
 import mutagen.mp4
 import mutagen.id3
-import urllib3 as urllib
+import urllib.request as urllib
 import os
 import platform
 import subprocess
@@ -187,11 +187,10 @@ class StemCreator:
             coverPath = self._tags["cover"]
             f = urllib.urlopen(coverPath)
             tags["covr"] = [mutagen.mp4.MP4Cover(f.read(),
-              mutagen.mp4.MP4Cover.FORMAT_PNG if coverPath.endswith('png') else
-              mutagen.mp4.MP4Cover.FORMAT_JPEG
+                mutagen.mp4.MP4Cover.FORMAT_PNG if coverPath.endswith('png') else
+                mutagen.mp4.MP4Cover.FORMAT_JPEG
             )]
             f.close()
-
         tags["TAUT"] = "STEM"
         tags.save(outputFilePath)
         
