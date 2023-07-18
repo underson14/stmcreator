@@ -143,7 +143,7 @@ class StemCreator:
             conversionCounter += 1
             print("\n[Feito " + str(conversionCounter) + "/6]\n")
             sys.stdout.flush()
-        callArgs.extend(["-udta", "0:type=stem:src=base64," + base64.b64encode(json.dumps(self._metadata))])
+        callArgs.extend(["-udta", "0:type=stem:src=base64," + base64.b64encode(json.dumps(self._metadata).encode('utf-8')).decode('utf-8')])
         subprocess.check_call(callArgs)
         sys.stdout.flush()
 
