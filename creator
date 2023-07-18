@@ -94,14 +94,14 @@ split_song() {
             if [ $int -lt $lmt1 ]; 
             then
                   echo "tamanho normal"
-                  spleeter separate "stems/$FILE_NAME/$FILE_NAME.wav" -B tensorflow -p "/content/stmcreator/base_config.json" -o stems -c m4a -b 328k
+                  spleeter separate "stems/$FILE_NAME/$FILE_NAME.wav" -p "/content/stmcreator/base_config.json" -o stems -c m4a -b 328k
             elif [ $int -ge $lmt1 ] && [ $int -lt $lmt2 ];
             then
                   echo "maior que 5 minutos e menor que 6 minutos e 30 segundos"
-                  spleeter separate "stems/$FILE_NAME/$FILE_NAME.wav" -B tensorflow -p "/content/stmcreator/base_config1.json" -o stems -c m4a -b 328k
+                  spleeter separate "stems/$FILE_NAME/$FILE_NAME.wav" -p "/content/stmcreator/base_config1.json" -o stems -c m4a -b 328k
             else
                   echo "maior 6 minutos e 30 segundos"
-                  spleeter separate "stems/$FILE_NAME/$FILE_NAME.wav" -B tensorflow -p "/content/stmcreator/base_config2.json" -o stems -c m4a -b 328k
+                  spleeter separate "stems/$FILE_NAME/$FILE_NAME.wav" -p "/content/stmcreator/base_config2.json" -o stems -c m4a -b 328k
             fi
     echo "Feito."
 }
