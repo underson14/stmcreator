@@ -1,5 +1,5 @@
 import codecs
-import json
+import json 
 import base64
 import mutagen
 import mutagen.mp4
@@ -48,7 +48,7 @@ class StemCreator:
         self._mixdownTrack = mixdownTrack
         self._stemTracks   = stemTracks
         self._format       = fileFormat if fileFormat else "libfdk_aac"
-        self._tags         = json.load(open(tags)) if tags else {}
+        self._tags         = json.loads(open(tags).read()) if tags else {}
 
         # Mutagen complains gravely if we do not explicitly convert the tag values to a
         # particular encoding. We chose UTF-8, others would work as well.
@@ -78,7 +78,7 @@ class StemCreator:
         if numStems > numMetaEntries:
             print("faltando metadata para stems " + str(numMetaEntries) + " - " + str(numStems))
             numDefaultEntries = len(self._defaultMetadata)
-            self._metadata.extend(self._defaultMetadata["stems"][numMetaEntries:min(numStems, numDefaultEntries)])
+            self._metadata["stems"].extend(self._defaultMetadata["stems"][numMetaEntries:min(numStems, numDefaultEntries)])
             self._metadata["stems"].extend([{"name" :"".join(["Stem_", str(i + numDefaultEntries)]), "color" : "#000000"} \
                 for i in range(numStems - numDefaultEntries)])
 
@@ -235,7 +235,7 @@ class StemMetadataViewer:
             fileObj = codecs.open(reportFile, mode="w", encoding="utf-8")
             try:
                 for i, value in enumerate(self._metadata["stems"]):
-                    line = u"Track {:>3}      name: {:>15}     color: {:>8}\n".format(i + 1, value["name"], value["color"])
+                    line = "Track {:>3}      name: {:>15}     color: {:>8}\n".format(i + 1, value["name"], value["color"])
                     fileObj.write(line)
             except Exception as e:
                 raise e
