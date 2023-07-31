@@ -11,7 +11,7 @@ import subprocess
 import sys
 
 stemDescription  = 'stem-meta'
-stemOutExtension = ".m4a"
+stemOutExtension = ".mp4"
 
 _windows = platform.system() == "Windows"
 
@@ -171,12 +171,7 @@ class StemCreator:
        
         tags["TAUT"] = "STEM"
         tags.save(outputFilePath)
-        
-        print("\n[Done 6/6]\n")
-        sys.stdout.flush()
-
-        print("creating " + outputFilePath + " was successful!")
-        
+                
         print("\n[Done 6/6]\n")
         sys.stdout.flush()
 
