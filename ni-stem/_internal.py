@@ -47,12 +47,13 @@ class StemCreator:
     def __init__(self, mixdownTrack, stemTracks, fileFormat, metadataFile = None, tags = None):
         self._mixdownTrack = mixdownTrack
         self._stemTracks   = stemTracks
-        self._format       = fileFormat if fileFormat else "libfdk_aac"
-        self._tags         = json.loads(open(tags).read()) if tags else {}
+        self._format       = fileFormat if fileFormat else "aac"
+        self._tags         = json.load(open(tags)) if tags else {}
 
         # Mutagen complains gravely if we do not explicitly convert the tag values to a
         # particular encoding. We chose UTF-8, others would work as well.
-        for key, value in self._tags.items(): self._tags[key] = value.encode('utf-8')
+        for key, value in self._tags.items(): 
+            self._tags[key] = value.encode('utf-8')
 
         metaData = []
         if metadataFile:
@@ -76,9 +77,9 @@ class StemCreator:
         # {"name" : "Stem_${TRACK#}", "color" : "#000000"}
 
         if numStems > numMetaEntries:
-            print("faltando metadata para stems " + str(numMetaEntries) + " - " + str(numStems))
+            print("missing stem metadata for stems " + str(numMetaEntries) + " - " + str(numStems))
             numDefaultEntries = len(self._defaultMetadata)
-            self._metadata["stems"].extend(self._defaultMetadata["stems"][numMetaEntries:min(numStems, numDefaultEntries)])
+            self._metadata.extend(self._defaultMetadata["stems"][numMetaEntries:min(numStems, numDefaultEntries)])
             self._metadata["stems"].extend([{"name" :"".join(["Stem_", str(i + numDefaultEntries)]), "color" : "#000000"} \
                 for i in range(numStems - numDefaultEntries)])
 
@@ -186,11 +187,13 @@ class StemCreator:
         if ("cover" in self._tags) and (len(self._tags["cover"]) > 0):
             coverPath = self._tags["cover"]
             f = urllib.urlopen(coverPath)
-            tags["covr"] = [mutagen.mp4.MP4Cover(f.read(),
-                mutagen.mp4.MP4Cover.FORMAT_PNG if coverPath.endswith('png') else
-                mutagen.mp4.MP4Cover.FORMAT_JPEG
+            tags["covr"] = [mutagen.mp4.MP4Cover(f.read(), 
+              mutagen.mp4.MP4Cover.FORMAT_PNG if coverPath.endswith('png') else
+              mutagen.mp4.MP4Cover.FORMAT_JPEG
             )]
-            f.close()
+            f.close()  
+
+
         tags["TAUT"] = "STEM"
         tags.save(outputFilePath)
         
@@ -225,7 +228,7 @@ class StemMetadataViewer:
         if metadataFile:
             fileObj = codecs.open(metadataFile, mode="w", encoding="utf-8")
             try:
-                fileObj.write(json.dumps(self._metadata))
+                fileObj.write(json.dumps(self._metadata)) 
             except Exception as e:
                 raise e
             finally:
@@ -235,9 +238,11 @@ class StemMetadataViewer:
             fileObj = codecs.open(reportFile, mode="w", encoding="utf-8")
             try:
                 for i, value in enumerate(self._metadata["stems"]):
-                    line = "Track {:>3}      name: {:>15}     color: {:>8}\n".format(i + 1, value["name"], value["color"])
+                    line = u"Track {:>3}      name: {:>15}     color: {:>8}\n".format(i + 1, value["name"], value["color"])
                     fileObj.write(line)
             except Exception as e:
                 raise e
             finally:
                 fileObj.close()
+
+
