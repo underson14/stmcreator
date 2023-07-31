@@ -150,13 +150,16 @@ class StemCreator:
             print("\n[Done " + str(conversionCounter) + "/6]\n")
             sys.stdout.flush()
 
-        metadata_dict = {}
-        metadata_dict['stems'] = self._metadata
-
-        callArgs.extend(["-udta", "0:type=stem:src=base64," + base64.b64encode(json.dumps(metadata_dict).encode('utf-8')).decode('utf-8')])
-        
+        metadata = json.dumps(self._metadata)
+        metadata = base64.b64encode(metadata.encode("utf-8"))
+        metadata = "0:type=stem:src=base64," + metadata.decode("utf-8")
+        callArgs.extend(["-udta", metadata])
         subprocess.check_call(callArgs)
         sys.stdout.flush()
+
+        # https://picard-docs.musicbrainz.org/en/appendices/tag_mapping.html
+        # http://www.jthink.net/jaudiotagger/tagmapping.html
+        # https://mutagen.readthedocs.io/en/latest/api/mp4.html
 
         tags = mutagen.mp4.Open(outputFilePath)
         # name
@@ -168,54 +171,128 @@ class StemCreator:
         # album
         if ("release" in self._tags):
             tags["\xa9alb"] = self._tags["release"]
-       
+        # album artist
+        if ("album_artist" in self._tags):
+            tags["aART"] = self._tags["album_artist"]
+        # remixer
+        if ("remixer" in self._tags):
+            tags["----:com.apple.iTunes:REMIXER"] = mutagen.mp4.MP4FreeForm(self._tags["remixer"].encode("utf-8"))
+        # mix
+        if ("mix" in self._tags):
+            tags["----:com.apple.iTunes:MIXER"] = mutagen.mp4.MP4FreeForm(self._tags["mix"].encode("utf-8"))
+        # producer
+        if ("producer" in self._tags):
+            tags["----:com.apple.iTunes:PRODUCER"] = mutagen.mp4.MP4FreeForm(self._tags["producer"].encode("utf-8"))
+        # label
+        if ("organization" in self._tags):
+            tags["----:com.apple.iTunes:LABEL"] = mutagen.mp4.MP4FreeForm(self._tags["organization"].encode("utf-8"))
+        if ("publisher" in self._tags):
+            tags["----:com.apple.iTunes:LABEL"] = mutagen.mp4.MP4FreeForm(self._tags["publisher"].encode("utf-8"))
+        if ("label" in self._tags):
+            tags["----:com.apple.iTunes:LABEL"] = mutagen.mp4.MP4FreeForm(self._tags["label"].encode("utf-8"))
+        # genre
+        if ("genre" in self._tags):
+            tags["\xa9gen"] = self._tags["genre"]
+        if ("style" in self._tags):
+            tags["\xa9gen"] = self._tags["style"]
+        # trkn
+        if ("track" in self._tags):
+            if ("track_count" in self._tags):
+                tags["trkn"] = self._tags["track"]
+        if ("track_no" in self._tags):
+            if ("track_count" in self._tags):
+                tags["trkn"] = [(int(self._tags["track_no"]), int(self._tags["track_count"]))]
+        # catalog number
+        if ("catalog_no" in self._tags):
+            tags["----:com.apple.iTunes:CATALOGNUMBER"] = mutagen.mp4.MP4FreeForm(self._tags["catalog_no"].encode("utf-8"))
+        # date
+        if ("year" in self._tags):
+            tags["\xa9day"] = self._tags["year"]
+        if ("date" in self._tags):
+            tags["\xa9day"] = self._tags["date"]
+        # isrc
+        if ("isrc" in self._tags):
+            tags["----:com.apple.iTunes:ISRC"] = mutagen.mp4.MP4FreeForm(self._tags["isrc"].encode("utf-8"), mutagen.mp4.AtomDataType.ISRC)
+        # barcode
+        if ("upc" in self._tags):
+            tags["----:com.apple.iTunes:BARCODE"] = mutagen.mp4.MP4FreeForm(str(self._tags["upc"]).encode("utf-8"), mutagen.mp4.AtomDataType.UPC)
+        # cover
+        if ("cover" in self._tags):
+            coverPath = self._tags["cover"]
+            with open(coverPath, "rb") as f:
+                coverData = f.read()
+            tags["covr"] = [mutagen.mp4.MP4Cover(coverData,
+              mutagen.mp4.MP4Cover.FORMAT_PNG if coverPath.endswith('png') else
+              mutagen.mp4.MP4Cover.FORMAT_JPEG
+            )]
+        # description (long description)
+        if ("description" in self._tags):
+            tags["ldes"] = self._tags["description"]
+        # comment
+        if ("comment" in self._tags):
+            tags["\xa9cmt"] = self._tags["comment"]
+        # bpm
+        if ("bpm" in self._tags):
+            tags["tmpo"] = [int(self._tags["bpm"])]
+        # initial key
+        if ("initialkey" in self._tags):
+            tags["----:com.apple.iTunes:initialkey"] = mutagen.mp4.MP4FreeForm(self._tags["initialkey"].encode("utf-8"))
+        # key
+        if ("key" in self._tags):
+            tags["----:com.apple.iTunes:KEY"] = mutagen.mp4.MP4FreeForm(self._tags["key"].encode("utf-8"))
+        # album
+        if ("album" in self._tags):
+            tags["\xa9alb"] = self._tags["album"]
+        # mood
+        if ("mood" in self._tags):
+            tags["----:com.apple.iTunes:MOOD"] = mutagen.mp4.MP4FreeForm(self._tags["mood"].encode("utf-8"))
+        # grouping
+        if ("grouping" in self._tags):
+            tags["\xa9grp"] = self._tags["grouping"]
+        # composer
+        if ("composer" in self._tags):
+            tags["\xa9wrt"] = self._tags["composer"]
+        # barcode
+        if ("barcode" in self._tags):
+            tags["----:com.apple.iTunes:BARCODE"] = mutagen.mp4.MP4FreeForm(str(self._tags["barcode"]).encode("utf-8"), mutagen.mp4.AtomDataType.UPC)
+        # lyrics
+        if ("lyrics" in self._tags):
+            tags["\xa9lyr"] = self._tags["lyrics"]
+        # copyright
+        if ("copyright" in self._tags):
+            tags["cprt"] = self._tags["copyright"]
+        # url_discogs_artist_site
+        if ("url_discogs_artist_site" in self._tags):
+            tags["----:com.apple.iTunes:URL_DISCOGS_ARTIST_SITE"] = mutagen.mp4.MP4FreeForm(self._tags["url_discogs_artist_site"].encode("utf-8"))
+        # url_discogs_release_site
+        if ("www" in self._tags):
+            tags["----:com.apple.iTunes:URL_DISCOGS_RELEASE_SITE"] = mutagen.mp4.MP4FreeForm(self._tags["www"].encode("utf-8"))
+        if ("url_discogs_release_site" in self._tags):
+            tags["----:com.apple.iTunes:URL_DISCOGS_RELEASE_SITE"] = mutagen.mp4.MP4FreeForm(self._tags["url_discogs_release_site"].encode("utf-8"))
+        # youtube_id
+        if ("youtube_id" in self._tags):
+            tags["----:com.apple.iTunes:YouTube Id"] = mutagen.mp4.MP4FreeForm(self._tags["youtube_id"].encode("utf-8"))
+        # beatport_id
+        if ("beatport_id" in self._tags):
+            tags["----:com.apple.iTunes:Beatport Id"] = mutagen.mp4.MP4FreeForm(self._tags["beatport_id"].encode("utf-8"))
+        # qobuz_id
+        if ("qobuz_id" in self._tags):
+            tags["----:com.apple.iTunes:Qobuz Id"] = mutagen.mp4.MP4FreeForm(self._tags["qobuz_id"].encode("utf-8"))
+        # discogs_id
+        if ("discogs_release_id" in self._tags):
+            tags["----:com.apple.iTunes:Discogs Id"] = mutagen.mp4.MP4FreeForm(self._tags["discogs_release_id"].encode("utf-8"))
+        # media
+        if ("media" in self._tags):
+            tags["----:com.apple.iTunes:MEDIA"] = mutagen.mp4.MP4FreeForm(self._tags["media"].encode("utf-8"))
+        # country
+        if ("country" in self._tags):
+            tags["----:com.apple.iTunes:COUNTRY"] = mutagen.mp4.MP4FreeForm(self._tags["country"].encode("utf-8"))
+
         tags["TAUT"] = "STEM"
         tags.save(outputFilePath)
-                
+        
         print("\n[Done 6/6]\n")
         sys.stdout.flush()
 
         print("creating " + outputFilePath + " was successful!")
 
-
-class StemMetadataViewer:
-
-    def __init__(self, stemFile):
-        self._metadata = {}
-
-        if stemFile:
-            folderName = "GPAC_win"   if _windows else "/content/stmcreator/ni-stem/gpac"
-            executable = "mp4box.exe" if _windows else "/usr/bin/MP4Box"
-            mp4box     = os.path.join(_getProgramPath(), folderName, executable)
-
-            callArgs = [mp4box]
-            callArgs.extend(["-dump-udta", "0:stem", stemFile])
-            subprocess.check_call(callArgs)
-
-            root, ext = os.path.splitext(stemFile)
-            udtaFile = root + "_stem.udta"
-            fileObj = codecs.open(udtaFile, encoding="utf-8")
-            fileObj.seek(8)
-            self._metadata = json.load(fileObj)
-            os.remove(udtaFile)
-
-    def dump(self, metadataFile = None, reportFile = None):
-        if metadataFile:
-            fileObj = codecs.open(metadataFile, mode="w", encoding="utf-8")
-            try:
-                fileObj.write(json.dumps(self._metadata)) 
-            except Exception as e:
-                raise e
-            finally:
-                fileObj.close()
-
-        if reportFile:
-            fileObj = codecs.open(reportFile, mode="w", encoding="utf-8")
-            try:
-                for i, value in enumerate(self._metadata["stems"]):
-                    line = u"Track {:>3}      name: {:>15}     color: {:>8}\n".format(i + 1, value["name"], value["color"])
-                    fileObj.write(line)
-            except Exception as e:
-                raise e
-            finally:
-                fileObj.close()
