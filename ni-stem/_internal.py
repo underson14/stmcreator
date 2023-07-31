@@ -1,5 +1,5 @@
 import codecs
-import json 
+import json
 import base64
 import mutagen
 import mutagen.mp4
@@ -9,6 +9,7 @@ import os
 import platform
 import subprocess
 import sys
+import re
 
 stemDescription  = 'stem-meta'
 stemOutExtension = ".mp4"
