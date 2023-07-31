@@ -32,10 +32,3 @@ for f in *.zip; do
       mv "$f" "Arquivos ZIP"
 done
 
-
-for f in *.*; do
-      mkdir "Arquivos ${f##*.}"
-      mkdir "${f##*.} ${data}"
-      mv "$f" "${f##*.} ${data}"
-      mv "${f##*.} ${data}" "Arquivos ${f##*.}"
-done
