@@ -1,4 +1,7 @@
 #/bin/bash
+
+cd "/content/drive/MyDrive/00.Musicas/stems"
+
 rename 's/&/e/g' *
 rename 's/:/,/g' *
 rename 's/;/, /g' *
