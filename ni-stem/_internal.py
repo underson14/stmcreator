@@ -15,7 +15,6 @@ stemDescription  = 'stem-meta'
 stemOutExtension = ".mp4"
 
 _windows = platform.system() == "Windows"
-_linux = platform.system() == "Linux"
 
 _supported_files_no_conversion = [".m4a", ".mp4", ".m4p"]
 _supported_files_conversion = [".wav", ".wave", ".aif", ".aiff", ".flac"]
@@ -34,50 +33,6 @@ def _getProgramPath():
         # the .exe, so we have to apply os.path.dirname() one more time
         folderPath = os.path.dirname(folderPath)
     return folderPath
-
-def _findCmd(cmd):
-    try:
-        from shutil import which
-        return which(cmd)
-    except ImportError:
-        import os
-        for path in os.environ["PATH"].split(os.pathsep):
-            if os.access(os.path.join(path, cmd), os.X_OK):
-                return path
-    return None
-
-def _checkAvailableAacEncoders():
-    output = subprocess.check_output([_findCmd("ffmpeg"), "-v", "error", "-codecs"])
-    aac_codecs = [
-        x for x in
-        output.splitlines() if "AAC (Advanced Audio Coding)" in str(x)
-    ][0]
-    hay = aac_codecs.decode('ascii')
-    match = re.findall(r'\(encoders: ([^\)]*) \)', hay)
-    if match:
-        return match[0].split(" ")
-    else:
-        return None
-
-def _getAacCodec():
-    avail = _checkAvailableAacEncoders()
-    if avail is not None:
-        if 'aac_at' in avail:
-            codec = 'aac_at'
-        elif 'libfdk_aac' in avail:
-            codec = 'libfdk_aac'
-        else:
-            print("For better audio quality, install `aac_at` or `libfdk_aac` codec.")
-            codec = 'aac'
-    else:
-        codec = 'aac'
-
-    return codec
-
-def _getSampleRate(trackPath):
-    output = subprocess.check_output([_findCmd("ffprobe"), "-v", "error", "-select_streams", "a", "-show_entries", "stream=sample_rate", "-of", "default=noprint_wrappers=1:nokey=1", trackPath])
-    return int(output)
-
 
 class StemCreator:
 
@@ -133,56 +88,29 @@ class StemCreator:
             return trackPath
 
         if fileExtension in _supported_files_conversion:
-            print("\nconverting " + trackPath + " to " + self._format + "...")
+            print("\nconvertendo " + trackPath + " para " + self._format + "...")
             sys.stdout.flush()
 
-            newPath = trackName + ".m4a"
+            newPath = trackName + ".mp4"
             _removeFile(newPath)
 
-            converter = "ffmpeg"
+            converter = os.path.join(_getProgramPath(), "avconv_win", "avconv.exe") if _windows else "ffmpeg"
             converterArgs = [converter]
 
-            if self._format == "aac":
-                # AAC
-                if _windows and (_findCmd("qaac64") is not None or _findCmd("qaac32") is not None or _findCmd("qaac") is not None):
-                    # Use QAAC on Windows if installed
-                    qaac = _findCmd("qaac64") if not None else _findCmd("qaac32") if not None else _findCmd("qaac")
-                    print("using QAAC Audio Toolbox codec")
-
-                    converterArgs = [qaac]
-                    converterArgs.extend([trackPath])
-                    converterArgs.extend(["--tvbr", "127"])
-                    converterArgs.extend(["-o"])
-                else:
-                    aacCodec = _getAacCodec()
-                    sampleRate = _getSampleRate(trackPath)
-
-                    print("using " + aacCodec + " codec")
-
-                    converterArgs.extend(["-i"  , trackPath])
-                    converterArgs.extend(["-c:a", aacCodec])
-                    if aacCodec == 'aac_at':
-                        converterArgs.extend(["-q:a", "0"])
-                    elif aacCodec == 'libfdk_aac':
-                        converterArgs.extend(["-vbr", "5"])
-                        # converterArgs.extend(["-cutoff", "20000"])
-                    converterArgs.extend(["-c:v", "copy"])
-                    # If the sample rate is superior to 48kHz, we need to downsample to 48kHz
-                    if sampleRate > 48000:
-                        print(str(sampleRate) + "Hz sample rate, downsampling to 48kHz")
-                        converterArgs.extend(["-ar", "48000"])
+            
+            converterArgs.extend(["-i"  , trackPath])
+            if self._format == "libfdk_aac":
+                converterArgs.extend(["-b:a", "328k"])
             else:
-                # ALAC
-                converterArgs.extend(["-i"  , trackPath])
-                converterArgs.extend(["-c:a", "alac"])
-                converterArgs.extend(["-c:v", "copy"])
+                converterArgs.extend(["-c:a", self._format])
+           
 
             converterArgs.extend([newPath])
             subprocess.check_call(converterArgs)
             return newPath
         else:
-            print("invalid input file format \"" + fileExtension + "\"")
-            print("valid input file formats are " + ", ".join(_supported_files_conversion))
+            print("formato de arquivo invalido \"" + fileExtension + "\"")
+            print("formatos validos sao " + ", ".join(_supported_files_conversion))
             sys.exit()
 
     def save(self, outputFilePath = None):
