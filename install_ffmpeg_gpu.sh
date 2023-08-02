@@ -22,10 +22,7 @@ apt install -y zip unzip
 rm -rf "/usr/local/lib/python3.10/dist-packages/spleeter/audio/ffmpeg.py"
 mv "/content/stmcreator/ni-stem/ffmpeg.py" "/usr/local/lib/python3.10/dist-packages/spleeter/audio/"
 
-sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
-sudo chmod a+rx /usr/local/bin/youtube-dl
+
 apt install -y atomicparsley
-apt install aria2 -y
-chmod +x "/content/stmcreator/downvideo.sh"
-chmod +x "/content/stmcreator/downmp3.sh"
+
 apt autoremove
