@@ -2,9 +2,12 @@
 rm /etc/localtime
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 
-git clone https://github.com/underson14/colab-ffmpeg-cuda.git
-cp -r ./colab-ffmpeg-cuda/bin/. /usr/bin/
-apt install ffmpeg
+#git clone https://github.com/underson14/colab-ffmpeg-cuda.git
+#cp -r ./colab-ffmpeg-cuda/bin/. /usr/bin/
+apt install build-essential curl
+
+bash <(curl -s "https://raw.githubusercontent.com/markus-perl/ffmpeg-build-script/master/web-install-gpl-and-non-free.sh?v1")
+
 pip3 install urllib3
 pip3 install spleeter
 apt install -y gpac 
