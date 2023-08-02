@@ -46,7 +46,7 @@ class StemCreator:
     def __init__(self, mixdownTrack, stemTracks, fileFormat, metadataFile = None, tags = None):
         self._mixdownTrack = mixdownTrack
         self._stemTracks   = stemTracks
-        self._format       = fileFormat if fileFormat else "alac"
+        self._format       = fileFormat if fileFormat else "aac"
         self._tags         = json.load(open(tags)) if tags else {}
 
         # Mutagen complains gravely if we do not explicitly convert the tag values to a
@@ -99,8 +99,10 @@ class StemCreator:
 
             
             converterArgs.extend(["-i"  , trackPath])
-            if self._format == "libfdk_aac":
-                converterArgs.extend(["-b:a", "328k"])
+            if self._format == "aac":
+                converterArgs.extend(["-c:a", "aac"])
+                converterArgs.extend(["-b:a", "328k"]) 
+                converterArgs.extend(["-vbr", "4"])
             else:
                 converterArgs.extend(["-c:a", self._format])
            
@@ -209,15 +211,6 @@ class StemCreator:
         # barcode
         if ("upc" in self._tags):
             tags["----:com.apple.iTunes:BARCODE"] = mutagen.mp4.MP4FreeForm(str(self._tags["upc"]).encode("utf-8"), mutagen.mp4.AtomDataType.UPC)
-        # cover
-        if ("cover" in self._tags):
-            coverPath = self._tags["cover"]
-            with open(coverPath, "rb") as f:
-                coverData = f.read()
-            tags["covr"] = [mutagen.mp4.MP4Cover(coverData,
-              mutagen.mp4.MP4Cover.FORMAT_PNG if coverPath.endswith('png') else
-              mutagen.mp4.MP4Cover.FORMAT_JPEG
-            )]
         # description (long description)
         if ("description" in self._tags):
             tags["ldes"] = self._tags["description"]
