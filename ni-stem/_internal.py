@@ -77,9 +77,8 @@ class StemCreator:
         if numStems > numMetaEntries:
             print("missing stem metadata for stems " + str(numMetaEntries) + " - " + str(numStems))
             numDefaultEntries = len(self._defaultMetadata)
-            self._metadata.extend(self._defaultMetadata["stems"][numMetaEntries:min(numStems, numDefaultEntries)])
-            self._metadata["stems"].extend([{"name" :"".join(["Stem_", str(i + numDefaultEntries)]), "color" : "#000000"} \
-                for i in range(numStems - numDefaultEntries)])
+            self._metadata.extend(self._defaultMetadata[numMetaEntries:min(numStems, numDefaultEntries)])
+            self._metadata.extend([{"name": "".join(["Stem_", str(i + numDefaultEntries)]), "color": "#000000"} for i in range(numStems - numDefaultEntries)])
 
     def _convertToFormat(self, trackPath, format):
         trackName, fileExtension = os.path.splitext(trackPath)
@@ -91,7 +90,7 @@ class StemCreator:
             print("\nconvertendo " + trackPath + " para " + self._format + "...")
             sys.stdout.flush()
 
-            newPath = trackName + ".mp4"
+            newPath = trackName + ".m4a"
             _removeFile(newPath)
 
             converter = os.path.join(_getProgramPath(), "avconv_win", "avconv.exe") if _windows else "ffmpeg"
