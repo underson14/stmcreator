@@ -2,6 +2,12 @@
 rm /etc/localtime
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 
+apt install -y libfdk-aac-dev
+git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg
+cd /content/ffmpeg
+./configure --enable-libfdk-aac --disable-x86asm
+make
+make install
 #apt install -y ffmpeg
 pip3 install spleeter
 apt install -y gpac 
@@ -18,8 +24,5 @@ apt install -y sox
 apt install -y zip unzip
 rm -rf "/usr/local/lib/python3.10/dist-packages/spleeter/audio/ffmpeg.py"
 mv "/content/stmcreator/ni-stem/ffmpeg.py" "/usr/local/lib/python3.10/dist-packages/spleeter/audio/"
-
-
 apt install -y atomicparsley
-
 apt autoremove
