@@ -2,10 +2,8 @@
 rm /etc/localtime
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 
-
-pip3 install urllib3
-pip3 install spleeter
 apt install -y ffmpeg
+pip3 install spleeter
 apt install -y gpac 
 cd /content/stmcreator
 unzip "/content/stmcreator/ni-stem/gpac.zip"
