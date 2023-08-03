@@ -2,7 +2,7 @@
 rm /etc/localtime
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 
-apt install -y ffmpeg
+#apt install -y ffmpeg
 pip3 install spleeter
 apt install -y gpac 
 cd /content/stmcreator
