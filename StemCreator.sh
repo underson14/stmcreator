@@ -1,6 +1,6 @@
 #/bin/bash
 
-cd "/content/drive/MyDrive/00.Musicas/stems"
+cd "/content/drive/MyDrive/StemCreator"
 
 rename 's/&/e/g' *
 rename 's/:/,/g' *
